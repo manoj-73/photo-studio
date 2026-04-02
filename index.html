@@ -1,0 +1,3668 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rahem Studio — Visual Excellence</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #faf9f7;
+  --fg: #1a1814;
+  --muted: #6b6560;
+  --accent: #a07840;
+  --accent2: #c8a96e;
+  --card: #ffffff;
+  --card2: #f2efe9;
+  --border: rgba(26,24,20,0.09);
+  --border-strong: rgba(26,24,20,0.16);
+  --shadow-sm: 0 1px 4px rgba(26,24,20,0.06), 0 4px 16px rgba(26,24,20,0.04);
+  --shadow-md: 0 4px 24px rgba(26,24,20,0.08), 0 1px 4px rgba(26,24,20,0.05);
+  --shadow-lg: 0 12px 48px rgba(26,24,20,0.12), 0 4px 16px rgba(26,24,20,0.06);
+  --radius: 18px;
+  --font-display: 'Cormorant Garamond', serif;
+  --font-body: 'DM Sans', sans-serif;
+  --transition: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.6;
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* Custom Cursor */
+#cursor {
+  width: 12px; height: 12px;
+  background: #1a1814;
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99999;
+  transition: transform 0.15s var(--transition), opacity 0.15s;
+  mix-blend-mode: normal;
+}
+#cursor-ring {
+  width: 40px; height: 40px;
+  border: 1.5px solid rgba(160,120,64,0.45);
+  border-radius: 50%;
+  position: fixed;
+  pointer-events: none;
+  z-index: 99998;
+  transition: transform 0.4s var(--transition), width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:hover #cursor { opacity: 1; }
+
+/* Nav */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 48px;
+  height: 64px;
+  background: rgba(250,249,247,0.88);
+  backdrop-filter: saturate(180%) blur(20px);
+  -webkit-backdrop-filter: saturate(180%) blur(20px);
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  transition: all 0.3s var(--transition);
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--fg);
+  text-decoration: none;
+}
+.nav-logo span { color: var(--accent); }
+.nav-links {
+  display: flex; gap: 32px; list-style: none;
+}
+.nav-links a {
+  color: var(--muted);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--fg); }
+.nav-cta {
+  background: var(--accent);
+  color: #000 !important;
+  padding: 8px 20px;
+  border-radius: 980px;
+  font-weight: 500 !important;
+  transition: all 0.2s !important;
+}
+.nav-cta:hover { background: var(--accent2) !important; transform: scale(1.04); }
+
+/* Hero */
+#hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background: 
+    radial-gradient(ellipse 80% 60% at 50% 20%, rgba(160,120,64,0.10) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 80% 80%, rgba(160,120,64,0.06) 0%, transparent 60%),
+    #faf9f7;
+}
+.hero-grain {
+  position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.18;
+  pointer-events: none;
+}
+.hero-content { position: relative; z-index: 2; max-width: 900px; padding: 0 24px; }
+.hero-eyebrow {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 24px;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.2s var(--transition) forwards;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(52px, 9vw, 120px);
+  font-weight: 300;
+  line-height: 1.0;
+  letter-spacing: -0.02em;
+  color: var(--fg);
+  opacity: 0;
+  animation: fadeUp 0.8s 0.4s var(--transition) forwards;
+}
+.hero-title em { font-style: italic; color: var(--accent); }
+.hero-sub {
+  margin-top: 24px;
+  font-size: 19px;
+  font-weight: 300;
+  color: var(--muted);
+  max-width: 560px;
+  margin-left: auto; margin-right: auto;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.6s var(--transition) forwards;
+}
+.hero-actions {
+  margin-top: 48px;
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  opacity: 0;
+  animation: fadeUp 0.8s 0.8s var(--transition) forwards;
+}
+.btn-primary {
+  background: var(--accent);
+  color: #000;
+  padding: 16px 36px;
+  border-radius: 980px;
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+  border: none; cursor: none;
+  transition: all 0.3s var(--transition);
+  display: inline-block;
+}
+.btn-primary:hover { background: var(--accent2); transform: scale(1.04); box-shadow: 0 0 40px rgba(200,169,110,0.3); }
+.btn-secondary {
+  background: transparent;
+  color: var(--accent);
+  padding: 16px 36px;
+  border-radius: 980px;
+  font-size: 17px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid var(--accent);
+  transition: all 0.3s var(--transition);
+  display: inline-block;
+}
+.btn-secondary:hover { background: rgba(160,120,64,0.07); transform: scale(1.04); }
+
+.hero-scroll-hint {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  color: var(--muted); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase;
+  animation: float 2s infinite;
+  opacity: 0; animation: fadeUp 0.8s 1.2s var(--transition) forwards, float 2.5s 2s infinite;
+}
+.scroll-line {
+  width: 1px; height: 48px;
+  background: linear-gradient(to bottom, var(--accent), rgba(160,120,64,0));
+  animation: lineGrow 1.5s 1.5s var(--transition) forwards;
+  transform-origin: top;
+  transform: scaleY(0);
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-8px); }
+}
+@keyframes lineGrow {
+  to { transform: scaleY(1); }
+}
+
+/* Sections */
+section { padding: 120px 48px; }
+.section-label {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+.section-title {
+  font-family: var(--font-display);
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 300;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin-bottom: 24px;
+}
+.section-title em { font-style: italic; color: var(--accent); }
+.section-sub {
+  font-size: 17px;
+  color: var(--muted);
+  max-width: 600px;
+  line-height: 1.7;
+}
+
+/* Services */
+#services { background: #faf9f7; }
+.services-intro { text-align: center; margin-bottom: 80px; }
+.services-intro .section-sub { margin: 0 auto; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.service-card {
+  position: relative;
+  background: var(--card);
+  padding: 52px 40px;
+  overflow: hidden;
+  transition: all 0.5s var(--transition);
+  cursor: none;
+}
+.service-card::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(135deg, rgba(200,169,110,0.08) 0%, transparent 60%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+.service-card:hover::before { opacity: 1; }
+.service-card:hover { background: #f7f4ee; transform: scale(1.01); z-index: 2; }
+.service-number {
+  font-family: var(--font-display);
+  font-size: 72px;
+  font-weight: 300;
+  color: rgba(160,120,64,0.12);
+  line-height: 1;
+  margin-bottom: 24px;
+  transition: color 0.4s;
+}
+.service-card:hover .service-number { color: rgba(160,120,64,0.28); }
+.service-icon {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.service-name {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  color: var(--fg);
+  margin-bottom: 12px;
+}
+.service-desc {
+  font-size: 15px;
+  color: var(--muted);
+  line-height: 1.7;
+}
+.service-link {
+  display: inline-flex; align-items: center; gap: 6px;
+  margin-top: 24px;
+  color: var(--accent);
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: gap 0.2s;
+}
+.service-link:hover { gap: 12px; }
+.service-card { cursor: none; }
+.service-card.active-card {
+  border: 1.5px solid var(--accent);
+  background: #fdf8f0;
+}
+
+/* ── Service Detail Drawer ─────────────────────────────────────────────────── */
+#service-drawer {
+  position: fixed;
+  inset: 0;
+  z-index: 8000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  pointer-events: none;
+}
+#service-drawer.open { pointer-events: all; }
+
+.drawer-backdrop {
+  position: absolute; inset: 0;
+  background: rgba(0,0,0,0);
+  backdrop-filter: blur(0px);
+  transition: background 0.45s var(--transition), backdrop-filter 0.45s var(--transition);
+}
+#service-drawer.open .drawer-backdrop {
+  background: rgba(26,24,20,0.45);
+  backdrop-filter: blur(24px);
+}
+
+.drawer-panel {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 1100px;
+  max-height: 90vh;
+  background: #fdfcfa;
+  border-radius: 28px 28px 0 0;
+  border: 1px solid rgba(160,120,64,0.18);
+  border-bottom: none;
+  overflow-y: auto;
+  transform: translateY(100%);
+  transition: transform 0.52s cubic-bezier(0.32, 0.72, 0, 1);
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160,120,64,0.25) transparent;
+}
+#service-drawer.open .drawer-panel { transform: translateY(0); }
+
+.drawer-handle {
+  width: 40px; height: 5px;
+  background: rgba(26,24,20,0.15);
+  border-radius: 3px;
+  margin: 16px auto 0;
+}
+
+.drawer-inner { padding: 0 52px 60px; }
+
+.drawer-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 36px 0 32px;
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  margin-bottom: 40px;
+}
+.drawer-header-left { display: flex; align-items: center; gap: 24px; }
+.drawer-big-icon {
+  width: 72px; height: 72px;
+  background: linear-gradient(135deg, rgba(200,169,110,0.15), rgba(200,169,110,0.05));
+  border-radius: 20px;
+  border: 1px solid rgba(200,169,110,0.2);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 32px;
+  flex-shrink: 0;
+}
+.drawer-title {
+  font-family: var(--font-display);
+  font-size: 40px;
+  font-weight: 300;
+  line-height: 1.1;
+}
+.drawer-title em { font-style: italic; color: var(--accent); }
+.drawer-subtitle { font-size: 15px; color: var(--muted); margin-top: 6px; }
+.drawer-close-btn {
+  width: 44px; height: 44px;
+  background: rgba(26,24,20,0.05);
+  border: 1px solid var(--border);
+  border-radius: 50%;
+  color: var(--fg);
+  font-size: 18px;
+  cursor: none;
+  flex-shrink: 0;
+  transition: background 0.2s;
+  display: flex; align-items: center; justify-content: center;
+}
+.drawer-close-btn:hover { background: rgba(26,24,20,0.1); }
+
+.drawer-body {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 52px;
+}
+
+.drawer-desc {
+  font-size: 17px;
+  color: var(--muted);
+  line-height: 1.8;
+  margin-bottom: 32px;
+}
+
+.drawer-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 16px;
+}
+
+.drawer-features {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 36px;
+}
+.drawer-features li {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; color: var(--fg);
+  padding: 12px 14px;
+  background: rgba(26,24,20,0.025);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: border-color 0.2s;
+}
+.drawer-features li:hover { border-color: rgba(200,169,110,0.25); }
+.drawer-features li::before { content: '✦'; color: var(--accent); font-size: 9px; flex-shrink: 0; }
+
+.drawer-process {
+  display: flex; flex-direction: column; gap: 0;
+  margin-bottom: 36px;
+}
+.process-step {
+  display: flex; gap: 16px;
+  position: relative;
+}
+.process-step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 15px; top: 36px;
+  width: 1px; height: calc(100% - 8px);
+  background: linear-gradient(to bottom, rgba(200,169,110,0.3), transparent);
+}
+.process-dot {
+  width: 32px; height: 32px;
+  border-radius: 50%;
+  background: rgba(200,169,110,0.1);
+  border: 1.5px solid rgba(200,169,110,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 600; color: var(--accent);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.process-content { padding-bottom: 24px; }
+.process-content strong { display: block; font-size: 14px; color: var(--fg); margin-bottom: 4px; }
+.process-content span { font-size: 13px; color: var(--muted); }
+
+/* Preview tiles inside drawer */
+.drawer-previews {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  margin-bottom: 32px;
+}
+.preview-tile {
+  aspect-ratio: 4/3;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  overflow: hidden;
+  position: relative;
+  cursor: none;
+  transition: transform 0.3s;
+}
+.preview-tile:first-child { grid-column: span 2; aspect-ratio: 16/7; }
+.preview-tile:hover { transform: scale(0.97); }
+.preview-tile-inner {
+  width: 100%; height: 100%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 36px;
+  position: relative;
+  overflow: hidden;
+}
+.preview-tile-label {
+  position: absolute; bottom: 10px; left: 12px;
+  font-size: 11px; font-weight: 500; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--accent);
+}
+
+.drawer-sidebar {}
+.drawer-meta-card {
+  background: rgba(200,169,110,0.05);
+  border: 1px solid rgba(200,169,110,0.15);
+  border-radius: 20px;
+  padding: 28px;
+  margin-bottom: 20px;
+}
+.drawer-meta-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  font-size: 14px;
+}
+.drawer-meta-row:last-child { border: none; padding-bottom: 0; }
+.drawer-meta-row span:first-child { color: var(--muted); }
+.drawer-meta-row span:last-child { color: var(--fg); font-weight: 500; }
+
+.drawer-add-ons {
+  background: #f5f2ec;
+  border-radius: 16px;
+  padding: 24px;
+  margin-bottom: 24px;
+}
+.drawer-add-ons h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+.addon-item {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 0;
+  border-bottom: 1px solid rgba(26,24,20,0.06);
+  font-size: 13px;
+}
+.addon-item:last-child { border: none; padding-bottom: 0; }
+.addon-name { color: var(--muted); }
+.addon-price { color: var(--accent); font-weight: 500; }
+
+.drawer-book-btn {
+  width: 100%;
+  padding: 18px;
+  background: var(--accent);
+  border: none;
+  border-radius: 14px;
+  color: #000;
+  font-size: 17px;
+  font-weight: 600;
+  cursor: none;
+  font-family: var(--font-body);
+  transition: all 0.3s var(--transition);
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+}
+.drawer-book-btn:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 10px 40px rgba(200,169,110,0.3); }
+.drawer-view-portfolio-btn {
+  width: 100%;
+  padding: 14px;
+  background: transparent;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: none;
+  font-family: var(--font-body);
+  transition: all 0.3s;
+  margin-top: 12px;
+}
+.drawer-view-portfolio-btn:hover { border-color: rgba(200,169,110,0.4); color: var(--fg); }
+
+@media (max-width: 768px) {
+  .drawer-inner { padding: 0 24px 48px; }
+  .drawer-body { grid-template-columns: 1fr; gap: 32px; }
+  .drawer-title { font-size: 28px; }
+  .drawer-features { grid-template-columns: 1fr; }
+  .drawer-previews { grid-template-columns: 1fr; }
+  .drawer-header { flex-direction: column; }
+  .drawer-header-left { flex-direction: column; align-items: flex-start; gap: 16px; }
+}
+
+/* ── Project Scale Selector (inside drawer) ────────────────────────────────── */
+.scale-selector-wrap {
+  margin-bottom: 32px;
+}
+.scale-selector-label {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--accent); margin-bottom: 14px;
+  display: block;
+}
+.scale-pills {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+.scale-pill {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: 6px;
+  padding: 16px 10px;
+  background: #faf9f7;
+  border: 1.5px solid var(--border);
+  border-radius: 14px;
+  cursor: none;
+  transition: all 0.25s var(--transition);
+  text-align: center;
+}
+.scale-pill:hover { border-color: rgba(200,169,110,0.35); background: rgba(200,169,110,0.05); }
+.scale-pill.selected {
+  border-color: var(--accent);
+  background: rgba(200,169,110,0.1);
+  box-shadow: 0 0 0 1px rgba(200,169,110,0.2);
+}
+.scale-pill-icon { font-size: 22px; }
+.scale-pill-name { font-size: 13px; font-weight: 600; color: var(--fg); }
+.scale-pill-desc { font-size: 11px; color: var(--muted); line-height: 1.4; }
+.scale-pill.selected .scale-pill-name { color: var(--accent); }
+
+.scale-detail-panel {
+  margin-top: 14px;
+  padding: 18px 20px;
+  background: rgba(160,120,64,0.05);
+  border: 1px solid rgba(160,120,64,0.18);
+  border-radius: 14px;
+  display: none;
+  animation: fadeUp 0.3s var(--transition) forwards;
+}
+.scale-detail-panel.show { display: block; }
+.scale-detail-grid {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+}
+.scale-detail-item { text-align: center; }
+.scale-detail-item .val { font-size: 15px; font-weight: 600; color: var(--fg); }
+.scale-detail-item .lbl { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+/* ── Booking Scale Step ────────────────────────────────────────────────────── */
+.booking-scale-step {
+  margin-bottom: 28px;
+  padding-bottom: 28px;
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+}
+.booking-scale-title {
+  font-size: 13px; font-weight: 600; letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 14px;
+}
+.booking-scale-cards {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 8px;
+}
+.bsc {
+  padding: 14px 10px;
+  border: 1.5px solid var(--border);
+  border-radius: 12px;
+  background: #faf9f7;
+  cursor: none;
+  text-align: center;
+  transition: all 0.25s var(--transition);
+}
+.bsc:hover { border-color: rgba(160,120,64,0.35); background: rgba(160,120,64,0.05); }
+.bsc.active {
+  border-color: var(--accent);
+  background: rgba(160,120,64,0.08);
+}
+.bsc-icon { font-size: 20px; margin-bottom: 5px; }
+.bsc-name { font-size: 12px; font-weight: 600; color: var(--fg); }
+.bsc-hint { font-size: 10px; color: var(--muted); margin-top: 2px; line-height: 1.3; }
+.bsc.active .bsc-name { color: var(--accent); }
+
+/* conditional booking fields */
+.booking-extra-fields {
+  display: none;
+  animation: fadeUp 0.3s var(--transition) forwards;
+}
+.booking-extra-fields.show { display: block; }
+
+/* scale badge shown on form after selection */
+.scale-badge-strip {
+  display: none;
+  align-items: center; gap: 10px;
+  padding: 10px 16px;
+  background: rgba(160,120,64,0.06);
+  border: 1px solid rgba(160,120,64,0.2);
+  border-radius: 10px;
+  margin-bottom: 20px;
+  font-size: 13px;
+}
+.scale-badge-strip.show { display: flex; }
+.scale-badge-strip .sb-icon { font-size: 16px; }
+.scale-badge-strip .sb-text { color: var(--fg); font-weight: 500; }
+.scale-badge-strip .sb-sub { color: var(--muted); font-size: 12px; margin-left: auto; }
+
+/* Portfolio */
+#portfolio { background: #f5f2ec; }
+.portfolio-tabs {
+  display: flex; gap: 4px;
+  background: #ffffff;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  padding: 4px;
+  width: fit-content;
+  margin: 0 auto 60px;
+}
+.tab-btn {
+  padding: 10px 24px;
+  border-radius: 10px;
+  border: none; background: transparent;
+  color: var(--muted);
+  font-size: 14px; font-weight: 500;
+  cursor: none;
+  transition: all 0.3s var(--transition);
+}
+.tab-btn.active {
+  background: var(--accent);
+  color: #ffffff;
+}
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+.portfolio-item {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #e8e4dc;
+  cursor: none;
+  transition: transform 0.4s var(--transition);
+}
+.portfolio-item:nth-child(1) { grid-column: span 2; grid-row: span 2; aspect-ratio: auto; min-height: 400px; }
+.portfolio-item:hover { transform: scale(0.98); }
+.portfolio-img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 48px;
+  background: linear-gradient(135deg, #e8e4dc 0%, #d8d3c8 100%);
+  transition: transform 0.5s var(--transition);
+}
+.portfolio-item:hover .portfolio-img { transform: scale(1.05); }
+.portfolio-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, transparent 50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  display: flex; align-items: flex-end;
+  padding: 24px;
+}
+.portfolio-item:hover .portfolio-overlay { opacity: 1; }
+.portfolio-tag {
+  font-size: 12px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* Booking Section */
+#booking {
+  background: linear-gradient(135deg, #f5f2ec 0%, #faf9f7 50%, #f5f2ec 100%);
+  position: relative;
+  overflow: hidden;
+}
+#booking::before {
+  content: '';
+  position: absolute;
+  top: -200px; right: -200px;
+  width: 600px; height: 600px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(160,120,64,0.07) 0%, transparent 70%);
+  pointer-events: none;
+}
+.booking-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 80px;
+  align-items: start;
+}
+.booking-info h2 { margin-bottom: 20px; }
+.booking-promise {
+  display: flex; flex-direction: column; gap: 20px;
+  margin-top: 40px;
+}
+.promise-item {
+  display: flex; align-items: flex-start; gap: 16px;
+  padding: 20px;
+  background: #ffffff;
+  border-radius: 14px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.promise-icon { font-size: 24px; flex-shrink: 0; }
+.promise-text strong { display: block; color: var(--fg); margin-bottom: 4px; font-size: 15px; }
+.promise-text span { font-size: 13px; color: var(--muted); }
+
+.booking-form {
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 40px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-lg);
+}
+.form-title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  font-weight: 400;
+  margin-bottom: 8px;
+}
+.form-sub { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+
+.form-group { margin-bottom: 20px; }
+.form-label {
+  display: block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  background: #faf9f7;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 18px;
+  color: var(--fg);
+  font-size: 16px;
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  cursor: none;
+}
+.form-input:focus, .form-select:focus, .form-textarea:focus {
+  border-color: var(--accent);
+  background: rgba(160,120,64,0.04);
+  box-shadow: 0 0 0 3px rgba(160,120,64,0.08);
+}
+.form-select option { background: #ffffff; color: #1a1814; }
+.form-textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.availability-display {
+  margin: 20px 0;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  background: #faf9f7;
+  display: none;
+}
+.availability-display.show { display: block; }
+.avail-available { color: #30d158; font-size: 14px; font-weight: 500; }
+.avail-booked { color: #ff453a; font-size: 14px; font-weight: 500; }
+.avail-info { color: var(--muted); font-size: 13px; margin-top: 4px; }
+
+.btn-check-avail {
+  width: 100%; padding: 14px;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 15px; font-weight: 500;
+  cursor: none;
+  transition: all 0.3s;
+  margin-bottom: 12px;
+  font-family: var(--font-body);
+}
+.btn-check-avail:hover { background: rgba(200,169,110,0.08); }
+.btn-book {
+  width: 100%; padding: 16px;
+  background: var(--accent);
+  border: none;
+  border-radius: 12px;
+  color: #000;
+  font-size: 17px; font-weight: 600;
+  cursor: none;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+.btn-book:hover { background: var(--accent2); transform: translateY(-2px); box-shadow: 0 8px 30px rgba(200,169,110,0.3); }
+
+/* Booking Success Modal */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 5000;
+  background: rgba(26,24,20,0.6);
+  backdrop-filter: blur(20px);
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; pointer-events: none;
+  transition: opacity 0.3s;
+}
+.modal-overlay.show { opacity: 1; pointer-events: all; }
+.modal-box {
+  background: #ffffff;
+  border-radius: 28px;
+  padding: 52px;
+  max-width: 480px;
+  width: 90%;
+  text-align: center;
+  border: 1px solid var(--border);
+  transform: scale(0.9);
+  transition: transform 0.3s var(--transition);
+}
+.modal-overlay.show .modal-box { transform: scale(1); }
+.modal-icon { font-size: 56px; margin-bottom: 20px; }
+.modal-title { font-family: var(--font-display); font-size: 32px; font-weight: 400; margin-bottom: 12px; }
+.modal-desc { font-size: 16px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+.modal-close {
+  background: var(--accent); color: #000;
+  border: none; border-radius: 980px;
+  padding: 14px 36px;
+  font-size: 16px; font-weight: 600;
+  cursor: none;
+  font-family: var(--font-body);
+  transition: background 0.2s;
+}
+.modal-close:hover { background: var(--accent2); }
+
+/* Pricing */
+#pricing { background: #fdfcfa; }
+.pricing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+.pricing-card {
+  background: var(--card);
+  border-radius: 24px;
+  padding: 48px 36px;
+  border: 1px solid var(--border);
+  position: relative;
+  transition: all 0.4s var(--transition);
+  cursor: none;
+}
+.pricing-card.featured {
+  background: linear-gradient(145deg, #2a1f0a, #1a1814);
+  border-color: var(--accent);
+  transform: scale(1.04);
+  color: #faf9f7;
+}
+.pricing-card.featured .pricing-name,
+.pricing-card.featured .pricing-amount,
+.pricing-card.featured .pricing-features li.included { color: #faf9f7; }
+.pricing-card.featured .pricing-desc,
+.pricing-card.featured .pricing-note,
+.pricing-card.featured .pricing-features li { color: rgba(250,249,247,0.6); }
+.pricing-card.featured .pricing-features li::before { color: var(--accent2); }
+.pricing-card:hover:not(.featured) { border-color: rgba(160,120,64,0.35); transform: translateY(-8px); box-shadow: var(--shadow-lg); }
+.pricing-card.featured:hover { transform: scale(1.06) translateY(-4px); }
+.featured-badge {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: var(--accent); color: #000;
+  padding: 6px 20px; border-radius: 980px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase;
+  white-space: nowrap;
+}
+.pricing-tier {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--accent); margin-bottom: 12px;
+}
+.pricing-name { font-family: var(--font-display); font-size: 32px; font-weight: 400; margin-bottom: 8px; }
+.pricing-desc { font-size: 14px; color: var(--muted); margin-bottom: 32px; line-height: 1.6; }
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 56px; font-weight: 300; line-height: 1;
+  color: var(--fg); margin-bottom: 8px;
+}
+.pricing-amount span { font-size: 24px; font-weight: 400; }
+.pricing-note { font-size: 13px; color: var(--muted); margin-bottom: 36px; }
+.pricing-features { list-style: none; margin-bottom: 36px; }
+.pricing-features li {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  font-size: 14px; color: var(--muted);
+}
+.pricing-features li:last-child { border: none; }
+.pricing-features li::before { content: '✦'; color: var(--accent); font-size: 10px; }
+.pricing-features li.included { color: var(--fg); }
+.btn-pricing {
+  width: 100%; padding: 16px;
+  background: transparent;
+  border: 1.5px solid var(--accent);
+  border-radius: 12px;
+  color: var(--accent);
+  font-size: 15px; font-weight: 500;
+  cursor: none;
+  transition: all 0.3s;
+  font-family: var(--font-body);
+}
+.pricing-card.featured .btn-pricing {
+  background: var(--accent); color: #000;
+}
+.btn-pricing:hover { background: var(--accent); color: #000; }
+.pricing-card.featured .btn-pricing:hover { background: var(--accent2); }
+
+/* Reviews */
+#reviews { background: #faf9f7; }
+.reviews-intro { text-align: center; margin-bottom: 72px; }
+.reviews-intro .section-sub { margin: 0 auto; }
+.reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1200px;
+  margin: 0 auto 60px;
+}
+.review-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 36px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  transition: all 0.4s var(--transition);
+  cursor: none;
+}
+.review-card:hover { border-color: rgba(160,120,64,0.35); transform: translateY(-6px); box-shadow: var(--shadow-md); }
+.review-stars { color: var(--accent); font-size: 14px; letter-spacing: 2px; margin-bottom: 20px; }
+.review-text { font-size: 16px; color: var(--fg); line-height: 1.7; font-weight: 300; margin-bottom: 28px; }
+.review-author { display: flex; align-items: center; gap: 14px; }
+.review-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--accent), var(--card2));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px;
+  flex-shrink: 0;
+}
+.review-name { font-size: 15px; font-weight: 500; }
+.review-event { font-size: 13px; color: var(--muted); }
+.review-badge {
+  margin-left: auto;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #30d158;
+  background: rgba(48,209,88,0.1);
+  padding: 4px 10px;
+  border-radius: 980px;
+}
+
+/* Add Review */
+.add-review-section {
+  max-width: 640px;
+  margin: 0 auto;
+  background: #ffffff;
+  border-radius: 24px;
+  padding: 48px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  text-align: center;
+}
+.add-review-section h3 { font-family: var(--font-display); font-size: 28px; font-weight: 400; margin-bottom: 8px; }
+.add-review-section p { font-size: 15px; color: var(--muted); margin-bottom: 32px; }
+.star-rating { display: flex; gap: 8px; justify-content: center; margin-bottom: 24px; font-size: 28px; cursor: none; }
+.star { transition: transform 0.2s, color 0.2s; color: var(--muted); cursor: none; }
+.star.active { color: var(--accent); }
+.star:hover { transform: scale(1.2); }
+
+/* Contact / About */
+#contact {
+  background: linear-gradient(180deg, #f5f2ec 0%, #faf9f7 100%);
+  text-align: center;
+}
+.contact-inner { max-width: 700px; margin: 0 auto; }
+.contact-inner .section-title { font-size: clamp(36px, 6vw, 72px); }
+.contact-details {
+  display: flex; gap: 48px; justify-content: center; flex-wrap: wrap;
+  margin: 52px 0;
+}
+.contact-item { text-align: center; }
+.contact-item-label { font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.contact-item-value { font-size: 17px; color: var(--fg); }
+.contact-item-value a { color: var(--accent); text-decoration: none; }
+
+/* Contract CTA */
+#contract {
+  background: var(--card);
+  padding: 80px 48px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+}
+.contract-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+  flex-wrap: wrap;
+}
+.contract-text h2 { font-family: var(--font-display); font-size: 36px; font-weight: 300; margin-bottom: 8px; }
+.contract-text p { font-size: 16px; color: var(--muted); }
+.contract-amount {
+  font-family: var(--font-display);
+  font-size: 52px;
+  font-weight: 300;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.contract-amount span { font-size: 20px; }
+
+/* Footer */
+footer {
+  background: #1a1814;
+  padding: 60px 48px 40px;
+  border-top: none;
+}
+footer .nav-logo,
+footer .footer-brand p,
+footer .footer-col h4,
+footer .footer-col a { color: rgba(250,249,247,0.7); }
+footer .footer-col a:hover { color: #faf9f7; }
+footer .footer-bottom { color: rgba(250,249,247,0.4); }
+.footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  max-width: 1400px;
+  margin: 0 auto 48px;
+}
+.footer-brand .nav-logo { display: block; margin-bottom: 16px; font-size: 26px; }
+.footer-brand p { font-size: 14px; color: var(--muted); line-height: 1.7; }
+.footer-col h4 { font-size: 13px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 20px; }
+.footer-col a {
+  display: block; color: var(--muted); text-decoration: none; font-size: 14px;
+  margin-bottom: 12px; transition: color 0.2s;
+}
+.footer-col a:hover { color: var(--fg); }
+.footer-bottom {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+/* Dev Panel Trigger */
+#dev-trigger {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 44px; height: 44px;
+  background: #1a1814;
+  border: 1px solid rgba(26,24,20,0.2);
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  cursor: none;
+  z-index: 4000;
+  transition: all 0.3s;
+  font-size: 16px;
+  backdrop-filter: blur(10px);
+}
+#dev-trigger:hover { background: #2a2318; border-color: rgba(160,120,64,0.4); }
+
+/* Dev Panel */
+#dev-panel {
+  position: fixed; inset: 0; z-index: 9000;
+  background: #f5f2ec;
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--transition);
+}
+#dev-panel.open { transform: translateX(0); }
+.dev-header {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 40px;
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  position: sticky; top: 0;
+  background: rgba(0,0,0,0.9);
+  backdrop-filter: blur(20px);
+  z-index: 10;
+}
+.dev-header h2 { font-family: var(--font-display); font-size: 28px; font-weight: 400; }
+.dev-close {
+  background: #f2efe9; border: none; border-radius: 50%;
+  width: 40px; height: 40px;
+  color: var(--fg); font-size: 18px;
+  cursor: none; transition: background 0.2s;
+}
+.dev-close:hover { background: #e8e4dc; }
+.dev-content { padding: 40px; max-width: 1400px; margin: 0 auto; }
+.dev-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+}
+.dev-section {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.dev-section h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; margin-bottom: 24px; color: var(--accent); }
+.dev-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+}
+.dev-table th {
+  text-align: left;
+  padding: 10px 12px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+}
+.dev-table td {
+  padding: 12px;
+  border-bottom: 1px solid rgba(26,24,20,0.06);
+  color: var(--fg);
+  vertical-align: top;
+}
+.dev-table tr:last-child td { border-bottom: none; }
+.status-badge {
+  display: inline-block;
+  padding: 3px 10px;
+  border-radius: 980px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.status-new { background: rgba(10,132,255,0.15); color: #0a84ff; }
+.status-pending { background: rgba(255,159,10,0.15); color: #ff9f0a; }
+.status-confirmed { background: rgba(48,209,88,0.15); color: #30d158; }
+.status-completed { background: rgba(200,169,110,0.15); color: var(--accent); }
+
+/* Slot Management */
+.slot-manager { margin-top: 0; }
+.slot-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 16px; }
+.slot-pill {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: #faf9f7;
+  font-size: 12px;
+  text-align: center;
+  cursor: none;
+  transition: all 0.2s;
+  display: flex; flex-direction: column; gap: 4px;
+}
+.slot-pill.available { border-color: rgba(48,209,88,0.3); }
+.slot-pill.booked { border-color: rgba(255,69,58,0.3); background: rgba(255,69,58,0.05); }
+.slot-pill .slot-time { font-weight: 600; color: var(--fg); }
+.slot-pill .slot-status { font-size: 10px; text-transform: uppercase; letter-spacing: 0.08em; }
+.slot-pill.available .slot-status { color: #30d158; }
+.slot-pill.booked .slot-status { color: #ff453a; }
+.slot-toggle-btn {
+  font-size: 10px; padding: 3px 8px;
+  border-radius: 6px; border: 1px solid;
+  background: transparent; cursor: none;
+  margin-top: 4px; font-family: var(--font-body);
+  transition: all 0.2s;
+}
+.slot-pill.available .slot-toggle-btn { border-color: rgba(255,69,58,0.5); color: #ff453a; }
+.slot-pill.booked .slot-toggle-btn { border-color: rgba(48,209,88,0.5); color: #30d158; }
+.slot-toggle-btn:hover { opacity: 0.7; }
+
+/* Scroll Reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s var(--transition), transform 0.8s var(--transition);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* Stats Strip */
+.stats-strip {
+  background: var(--card);
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  padding: 60px 48px;
+}
+.stats-inner {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  max-width: 1000px; margin: 0 auto;
+  gap: 0;
+}
+.stat-item { text-align: center; padding: 20px; border-right: 1px solid var(--border); }
+.stat-item:last-child { border: none; }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 52px; font-weight: 300;
+  color: var(--fg); line-height: 1;
+}
+.stat-number em { color: var(--accent); font-style: normal; }
+.stat-label { font-size: 13px; color: var(--muted); margin-top: 8px; letter-spacing: 0.05em; }
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .services-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-item:nth-child(1) { grid-column: span 2; }
+  .pricing-grid { grid-template-columns: 1fr; }
+  .pricing-card.featured { transform: none; }
+  .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  .footer-top { grid-template-columns: 1fr 1fr; }
+  .dev-grid { grid-template-columns: 1fr; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+  .stats-inner .stat-item:nth-child(2) { border-right: none; }
+}
+/* ── Mobile Nav ──────────────────────────────────────────────────────────────── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: none; padding: 4px;
+}
+.nav-hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--fg); border-radius: 2px;
+  transition: all 0.3s var(--transition);
+}
+.nav-hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-hamburger.open span:nth-child(2) { opacity: 0; transform: scaleX(0); }
+.nav-hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.mobile-nav-drawer {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 999;
+  background: rgba(250,249,247,0.98);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  padding: 0;
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--transition), padding 0.3s;
+}
+.mobile-nav-drawer.open { max-height: 400px; padding: 24px 0; }
+.mobile-nav-drawer a {
+  display: block; padding: 14px 32px;
+  color: var(--fg); text-decoration: none; font-size: 17px;
+  border-bottom: 1px solid rgba(255,255,255,0.04);
+  transition: color 0.2s, padding-left 0.2s;
+}
+.mobile-nav-drawer a:hover { color: var(--fg); padding-left: 40px; }
+.mobile-nav-drawer .mob-cta {
+  margin: 16px 32px 0; display: block; text-align: center;
+  padding: 14px; background: var(--accent); color: #000 !important;
+  border-radius: 12px; font-weight: 600; border-bottom: none;
+}
+
+/* ── Inline Form Errors ───────────────────────────────────────────────────────── */
+.field-error {
+  font-size: 12px; color: #ff453a;
+  margin-top: 6px; display: none;
+  animation: fadeUp 0.2s var(--transition) forwards;
+}
+.field-error.show { display: block; }
+.form-input.error, .form-select.error { border-color: #ff453a !important; background: rgba(255,69,58,0.05) !important; }
+
+/* ── Live Quote Estimator ─────────────────────────────────────────────────────── */
+.quote-estimator {
+  background: linear-gradient(135deg, rgba(160,120,64,0.06), rgba(160,120,64,0.02));
+  border: 1px solid rgba(200,169,110,0.2);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 20px 0;
+  display: none;
+  animation: fadeUp 0.4s var(--transition) forwards;
+}
+.quote-estimator.show { display: block; }
+.quote-est-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.quote-est-amount {
+  font-family: var(--font-display);
+  font-size: 40px; font-weight: 300; color: var(--fg); line-height: 1;
+}
+.quote-est-amount em { color: var(--accent); font-style: normal; }
+.quote-est-range { font-size: 13px; color: var(--muted); margin-top: 6px; }
+.quote-est-breakdown {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 8px; margin-top: 16px;
+}
+.qeb-item {
+  background: #faf9f7; border: 1px solid var(--border);
+  border-radius: 8px; padding: 10px 12px;
+  font-size: 12px;
+}
+.qeb-item .ql { color: var(--muted); margin-bottom: 2px; }
+.qeb-item .qv { color: var(--fg); font-weight: 500; }
+
+/* ── WhatsApp Float ──────────────────────────────────────────────────────────── */
+#whatsapp-float {
+  position: fixed; bottom: 80px; right: 24px; z-index: 3999;
+  width: 52px; height: 52px;
+  background: #25d366;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 24px;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+  cursor: none;
+  transition: all 0.3s var(--transition);
+  text-decoration: none;
+  animation: waPulse 2.5s infinite;
+}
+#whatsapp-float:hover { transform: scale(1.12); box-shadow: 0 6px 30px rgba(37,211,102,0.6); animation: none; }
+@keyframes waPulse {
+  0%,100% { box-shadow: 0 4px 20px rgba(37,211,102,0.3); }
+  50% { box-shadow: 0 4px 30px rgba(37,211,102,0.7), 0 0 0 8px rgba(37,211,102,0.1); }
+}
+.wa-tooltip {
+  position: absolute; right: 60px; top: 50%; transform: translateY(-50%);
+  background: #1a1814; border: 1px solid var(--border); border-radius: 8px;
+  padding: 6px 12px; font-size: 12px; white-space: nowrap; color: var(--fg);
+  opacity: 0; pointer-events: none; transition: opacity 0.2s;
+}
+#whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
+/* ── FAQ Section ─────────────────────────────────────────────────────────────── */
+#faq { background: #f5f2ec; }
+.faq-intro { text-align: center; margin-bottom: 64px; }
+.faq-grid {
+  max-width: 820px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 0;
+}
+.faq-item {
+  border-bottom: 1px solid var(--border); box-shadow: 0 1px 20px rgba(26,24,20,0.06);
+  overflow: hidden;
+}
+.faq-item:first-child { border-top: 1px solid var(--border); }
+.faq-q {
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 24px 0;
+  cursor: none;
+  font-size: 17px; font-weight: 400; color: var(--fg);
+  transition: color 0.2s;
+  gap: 16px;
+  background: none; border: none; width: 100%; text-align: left;
+  font-family: var(--font-body);
+}
+.faq-q:hover { color: var(--accent); }
+.faq-q.open { color: var(--accent); }
+.faq-chevron {
+  width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; flex-shrink: 0;
+  transition: transform 0.35s var(--transition), border-color 0.2s, background 0.2s;
+  color: var(--muted);
+}
+.faq-q.open .faq-chevron {
+  transform: rotate(45deg);
+  border-color: var(--accent); background: rgba(160,120,64,0.08);
+  color: var(--accent);
+}
+.faq-a {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.4s var(--transition), padding 0.3s;
+  font-size: 15px; color: var(--muted); line-height: 1.8;
+  padding: 0;
+}
+.faq-a.open { max-height: 300px; padding-bottom: 24px; }
+
+/* ── Contract Inquiry Modal ─────────────────────────────────────────────────── */
+#contractModal .modal-box { max-width: 560px; text-align: left; background: #fdfcfa; }
+.contract-modal-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 14px; margin-bottom: 20px;
+}
+.contract-perks { margin: 20px 0; }
+.contract-perks-title { font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
+.contract-perk { display: flex; align-items: center; gap: 10px; padding: 8px 0; font-size: 14px; color: var(--muted); border-bottom: 1px solid rgba(26,24,20,0.07); }
+.contract-perk:last-child { border: none; }
+.contract-perk::before { content: '✦'; color: var(--accent); font-size: 9px; }
+#contractModal .form-title { font-size: 32px; margin-bottom: 4px; }
+#contractModal .form-sub { margin-bottom: 20px; }
+.contract-price-display {
+  display: flex; align-items: baseline; gap: 8px;
+  margin-bottom: 24px; padding: 16px 20px;
+  background: rgba(160,120,64,0.06); border: 1px solid rgba(160,120,64,0.18);
+  border-radius: 14px;
+}
+.cpd-amount { font-family: var(--font-display); font-size: 48px; font-weight: 300; color: var(--accent); }
+.cpd-period { font-size: 16px; color: var(--muted); }
+.cpd-note { font-size: 12px; color: var(--muted); margin-left: auto; align-self: center; text-align: right; line-height: 1.4; }
+
+/* ── Dev Analytics Card ──────────────────────────────────────────────────────── */
+.dev-analytics {
+  background: #ffffff; border-radius: 20px; padding: 32px;
+  border: 1px solid var(--border); box-shadow: var(--shadow-sm); margin-bottom: 32px;
+}
+.dev-analytics h3 { font-family: var(--font-display); font-size: 22px; font-weight: 400; margin-bottom: 24px; color: var(--accent); }
+.analytics-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+.analytics-card {
+  background: #faf9f7; border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px 16px; text-align: center;
+}
+.analytics-val { font-family: var(--font-display); font-size: 36px; font-weight: 300; color: var(--fg); line-height: 1; }
+.analytics-val.accent { color: var(--accent); }
+.analytics-val.green { color: #30d158; }
+.analytics-val.blue { color: #0a84ff; }
+.analytics-val.orange { color: #ff9f0a; }
+.analytics-lbl { font-size: 11px; color: var(--muted); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.08em; }
+
+@media (max-width: 768px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  section { padding: 80px 24px; }
+  .booking-container { grid-template-columns: 1fr; gap: 40px; }
+  .reviews-grid { grid-template-columns: 1fr; }
+  .portfolio-grid { grid-template-columns: repeat(2, 1fr); }
+  .portfolio-item:nth-child(1) { grid-column: span 2; }
+  .services-grid { grid-template-columns: 1fr; }
+  .form-row { grid-template-columns: 1fr; }
+  .contract-inner { flex-direction: column; text-align: center; }
+  .footer-top { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  .stats-inner { grid-template-columns: repeat(2, 1fr); }
+}
+/* ── Portfolio Manager (Dev Panel) — Tabbed Categories ───────────────────────── */
+.pm-section { grid-column: 1 / -1; }
+
+/* Category tab bar */
+.pm-cat-tabs {
+  display: flex; gap: 6px; flex-wrap: wrap;
+  margin-bottom: 24px;
+  background: #faf9f7;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 6px;
+}
+.pm-cat-tab {
+  display: flex; align-items: center; gap: 7px;
+  padding: 10px 18px;
+  border-radius: 10px;
+  border: none; background: transparent;
+  color: var(--muted); font-size: 13px; font-weight: 500;
+  cursor: none; transition: all 0.25s var(--transition);
+  font-family: var(--font-body);
+  white-space: nowrap;
+}
+.pm-cat-tab:hover { color: var(--fg); background: rgba(26,24,20,0.06); }
+.pm-cat-tab.active { background: var(--accent); color: #000; }
+.pm-tab-count {
+  background: rgba(0,0,0,0.25);
+  border-radius: 980px;
+  padding: 1px 8px;
+  font-size: 11px; font-weight: 700;
+  min-width: 20px; text-align: center;
+}
+.pm-cat-tab.active .pm-tab-count { background: rgba(0,0,0,0.2); color: #000; }
+
+/* Tab panels */
+.pm-tab-panel { display: none; }
+.pm-tab-panel.active { display: block; }
+
+/* Per-category upload zone */
+.pm-cat-upload-zone {
+  position: relative;
+  border: 2px dashed rgba(160,120,64,0.25);
+  border-radius: 16px;
+  padding: 32px 24px;
+  text-align: center;
+  cursor: none;
+  transition: all 0.3s var(--transition);
+  background: rgba(160,120,64,0.02);
+  margin-bottom: 20px;
+}
+.pm-cat-upload-zone:hover, .pm-cat-upload-zone.drag-over {
+  border-color: var(--accent);
+  background: rgba(160,120,64,0.05);
+}
+.pm-file-input {
+  position: absolute; inset: 0; opacity: 0; cursor: none;
+  width: 100%; height: 100%;
+}
+.pm-upload-icon { font-size: 32px; margin-bottom: 8px; }
+.pm-upload-title { font-size: 15px; font-weight: 500; color: var(--fg); margin-bottom: 5px; }
+.pm-upload-sub { font-size: 12px; color: var(--muted); }
+
+/* Pending bar */
+.pm-pending-bar {
+  font-size: 13px; color: var(--muted);
+  padding: 10px 14px;
+  background: #faf9f7;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  margin-bottom: 14px;
+}
+
+/* Inline caption form */
+.pm-inline-form {
+  display: flex; align-items: center; gap: 14px;
+  padding: 16px;
+  background: rgba(160,120,64,0.04);
+  border: 1px solid rgba(160,120,64,0.18);
+  border-radius: 14px;
+  margin-bottom: 20px;
+  animation: fadeUp 0.3s var(--transition) forwards;
+}
+.pm-inline-thumb {
+  width: 80px; height: 60px; flex-shrink: 0;
+  border-radius: 10px; overflow: hidden;
+  background: #f2efe9; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+}
+.pm-inline-thumb img, .pm-inline-thumb video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.pm-inline-fields {
+  flex: 1; display: flex; gap: 10px; align-items: center;
+}
+.pm-inline-fields .form-input { flex: 1; margin-bottom: 0; }
+.pm-add-btn {
+  padding: 14px 18px;
+  background: var(--accent); color: #000;
+  border: none; border-radius: 10px;
+  font-size: 13px; font-weight: 600;
+  cursor: none; white-space: nowrap;
+  transition: background 0.2s;
+  font-family: var(--font-body);
+}
+.pm-add-btn:hover { background: var(--accent2); }
+
+/* Items list */
+.pm-items-grid {
+  display: flex; flex-direction: column; gap: 8px;
+  max-height: 440px; overflow-y: auto;
+  scrollbar-width: thin; scrollbar-color: rgba(160,120,64,0.25) transparent;
+}
+.pm-item {
+  display: flex; align-items: center; gap: 14px;
+  padding: 12px 14px;
+  background: #faf9f7;
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  transition: border-color 0.2s;
+}
+.pm-item:hover { border-color: rgba(200,169,110,0.25); }
+.pm-preview-strip {
+  width: 76px; height: 56px; flex-shrink: 0;
+  border-radius: 9px; overflow: hidden;
+  background: #f2efe9; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.pm-preview-strip img, .pm-preview-strip video {
+  width: 100%; height: 100%; object-fit: cover;
+}
+.pm-item-info { flex: 1; min-width: 0; }
+.pm-item-title { font-size: 13px; font-weight: 500; color: var(--fg); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pm-item-meta { font-size: 11px; color: var(--muted); margin-top: 2px; }
+.pm-item-type {
+  font-size: 10px; padding: 3px 8px; border-radius: 6px;
+  font-weight: 600; text-transform: uppercase; flex-shrink: 0;
+}
+.pm-item-type.photo { background: rgba(48,209,88,0.12); color: #30d158; }
+.pm-item-type.video { background: rgba(10,132,255,0.12); color: #0a84ff; }
+.pm-item-del {
+  background: rgba(255,69,58,0.1); border: 1px solid rgba(255,69,58,0.22);
+  border-radius: 8px; color: #ff453a;
+  padding: 5px 10px; font-size: 11px; cursor: none;
+  transition: background 0.2s; flex-shrink: 0;
+  font-family: var(--font-body);
+}
+.pm-item-del:hover { background: rgba(255,69,58,0.22); }
+.pm-empty {
+  text-align: center; padding: 28px; color: var(--muted);
+  font-size: 13px; background: #faf9f7;
+  border: 1px dashed var(--border); border-radius: 12px;
+}
+
+/* All-tab overview grid */
+.pm-all-grid {
+  display: grid; grid-template-columns: repeat(4,1fr); gap: 10px;
+  max-height: 480px; overflow-y: auto; border-radius: 12px; overflow: hidden;
+}
+.pm-all-item {
+  position: relative; border-radius: 12px; overflow: hidden;
+  aspect-ratio: 4/3; border: 1px solid var(--border);
+  background: var(--card2);
+}
+.pm-all-item img, .pm-all-item video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.pm-all-item .pm-all-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 55%);
+  display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 10px;
+}
+.pm-all-item .pm-all-title { font-size: 11px; color: #fff; font-weight: 500; line-height: 1.3; }
+.pm-all-item .pm-all-cat {
+  font-size: 9px; font-weight: 700; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--accent); margin-top: 2px;
+}
+.pm-all-del-btn {
+  position: absolute; top: 7px; right: 7px;
+  width: 24px; height: 24px; border-radius: 50%;
+  background: rgba(0,0,0,0.7); border: 1px solid rgba(255,69,58,0.5);
+  color: #ff453a; font-size: 10px; cursor: none;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0; transition: opacity 0.2s;
+}
+.pm-all-item:hover .pm-all-del-btn { opacity: 1; }
+
+/* Portfolio item video indicator */
+.portfolio-item .vid-badge {
+  position: absolute; top: 12px; right: 12px;
+  background: rgba(0,0,0,0.7); color: #fff;
+  font-size: 10px; font-weight: 600; letter-spacing: 0.08em;
+  padding: 3px 8px; border-radius: 6px; text-transform: uppercase;
+}
+.portfolio-item video {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.portfolio-item img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- Navigation -->
+<nav>
+  <a href="#" class="nav-logo">Lens<span>Aura</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#pricing">Pricing</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#booking" class="nav-cta">Book Now</a></li>
+  </ul>
+  <button class="nav-hamburger" id="navHamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Mobile Nav Drawer -->
+<div class="mobile-nav-drawer" id="mobileNavDrawer">
+  <a href="#services" onclick="closeMobileNav()">Services</a>
+  <a href="#portfolio" onclick="closeMobileNav()">Portfolio</a>
+  <a href="#pricing" onclick="closeMobileNav()">Pricing</a>
+  <a href="#reviews" onclick="closeMobileNav()">Reviews</a>
+  <a href="#faq" onclick="closeMobileNav()">FAQ</a>
+  <a href="#contact" onclick="closeMobileNav()">Contact</a>
+  <a href="#booking" class="mob-cta" onclick="closeMobileNav()">📅 Book Now</a>
+</div>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grain"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Photography & Videography Studio</div>
+    <h1 class="hero-title">Every Frame<br>Tells Your <em>Story</em></h1>
+    <p class="hero-sub">Award-winning photography and videography for weddings, events, brands, and beyond — crafted with intention and delivered with excellence.</p>
+    <div class="hero-actions">
+      <a href="#booking" class="btn-primary">Book Your Session</a>
+      <a href="#portfolio" class="btn-secondary">View Portfolio</a>
+    </div>
+  </div>
+  <div class="hero-scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Stats -->
+<div class="stats-strip">
+  <div class="stats-inner">
+    <div class="stat-item reveal">
+      <div class="stat-number">2<em>K</em><em>+</em></div>
+      <div class="stat-label">Sessions Delivered</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-1">
+      <div class="stat-number">8<em>+</em></div>
+      <div class="stat-label">Years of Excellence</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-2">
+      <div class="stat-number">98<em>%</em></div>
+      <div class="stat-label">Client Satisfaction</div>
+    </div>
+    <div class="stat-item reveal reveal-delay-3">
+      <div class="stat-number">45</div>
+      <div class="stat-label">Minute Response Time</div>
+    </div>
+  </div>
+</div>
+
+<!-- Services -->
+<section id="services">
+  <div class="services-intro reveal">
+    <div class="section-label">What We Do</div>
+    <h2 class="section-title">Every Visual Medium,<br><em>Mastered</em></h2>
+    <p class="section-sub">From intimate weddings to large-scale brand campaigns — we bring technical precision and artistic vision to every project.</p>
+  </div>
+  <div class="services-grid">
+    <div class="service-card reveal" onclick="openService('photoshop')">
+      <div class="service-number">01</div>
+      <div class="service-icon">🎭</div>
+      <div class="service-name">Photoshop & Editing</div>
+      <p class="service-desc">Professional post-production and retouching. Skin retouching, color grading, background replacement, composite art, and full editorial refinement.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1" onclick="openService('wedding')">
+      <div class="service-number">02</div>
+      <div class="service-icon">💍</div>
+      <div class="service-name">Wedding Photography & Film</div>
+      <p class="service-desc">Timeless documentation of your most precious day. Candid moments, portraits, full ceremony & reception coverage. Cinematic wedding films.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2" onclick="openService('promotion')">
+      <div class="service-number">03</div>
+      <div class="service-icon">📢</div>
+      <div class="service-name">Promotion Photos & Videos</div>
+      <p class="service-desc">High-impact promotional content for brands, restaurants, products, and services. Designed to convert and captivate your audience.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+    <div class="service-card reveal" onclick="openService('ads')">
+      <div class="service-number">04</div>
+      <div class="service-icon">📺</div>
+      <div class="service-name">Advertisement Production</div>
+      <p class="service-desc">Commercial-grade ads for social media, OTT platforms, and broadcast. Scripted, shot, and edited to meet platform specifications.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-1" onclick="openService('events')">
+      <div class="service-number">05</div>
+      <div class="service-icon">🎪</div>
+      <div class="service-name">Event Coverage</div>
+      <p class="service-desc">Corporate events, product launches, concerts, galas, conferences. Multi-camera setups, live event documentation, same-day highlight reels.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+    <div class="service-card reveal reveal-delay-2" onclick="openService('creative')">
+      <div class="service-number">06</div>
+      <div class="service-icon">🎬</div>
+      <div class="service-name">Creative Direction</div>
+      <p class="service-desc">Full creative concept development. Mood boards, location scouting, styling direction, and end-to-end production management.</p>
+      <span class="service-link">Explore Service →</span>
+    </div>
+  </div>
+</section>
+
+<!-- Service Detail Drawer -->
+<div id="service-drawer">
+  <div class="drawer-backdrop" onclick="closeServiceDrawer()"></div>
+  <div class="drawer-panel">
+    <div class="drawer-handle"></div>
+    <div class="drawer-inner">
+      <div class="drawer-header">
+        <div class="drawer-header-left">
+          <div class="drawer-big-icon" id="drawerIcon"></div>
+          <div>
+            <div class="drawer-title" id="drawerTitle"></div>
+            <div class="drawer-subtitle" id="drawerSubtitle"></div>
+          </div>
+        </div>
+        <button class="drawer-close-btn" onclick="closeServiceDrawer()">✕</button>
+      </div>
+      <div class="drawer-body">
+        <div class="drawer-left">
+          <p class="drawer-desc" id="drawerDesc"></p>
+
+          <!-- Scale Selector -->
+          <div class="scale-selector-wrap">
+            <span class="scale-selector-label">Select Your Project Scale</span>
+            <div class="scale-pills">
+              <div class="scale-pill" onclick="selectDrawerScale('single', this)">
+                <span class="scale-pill-icon">👤</span>
+                <span class="scale-pill-name">Single / Solo</span>
+                <span class="scale-pill-desc">1 person, personal project or portrait</span>
+              </div>
+              <div class="scale-pill" onclick="selectDrawerScale('medium', this)">
+                <span class="scale-pill-icon">👥</span>
+                <span class="scale-pill-name">Small / Medium</span>
+                <span class="scale-pill-desc">Family, small event, small brand</span>
+              </div>
+              <div class="scale-pill" onclick="selectDrawerScale('large', this)">
+                <span class="scale-pill-icon">🏢</span>
+                <span class="scale-pill-name">Large / Corporate</span>
+                <span class="scale-pill-desc">Big event, brand contract, campaign</span>
+              </div>
+            </div>
+            <div class="scale-detail-panel" id="drawerScaleDetail">
+              <div class="scale-detail-grid" id="drawerScaleGrid"></div>
+            </div>
+          </div>
+
+          <div class="drawer-section-label">What's Included</div>
+          <ul class="drawer-features" id="drawerFeatures"></ul>
+
+          <div class="drawer-section-label">Our Process</div>
+          <div class="drawer-process" id="drawerProcess"></div>
+
+          <div class="drawer-section-label">Sample Work</div>
+          <div class="drawer-previews" id="drawerPreviews"></div>
+        </div>
+        <div class="drawer-sidebar">
+          <div class="drawer-meta-card">
+            <div id="drawerMeta"></div>
+          </div>
+          <div class="drawer-add-ons">
+            <h4>Add-Ons Available</h4>
+            <div id="drawerAddons"></div>
+          </div>
+          <button class="drawer-book-btn" id="drawerBookBtn" onclick="bookFromDrawer()">
+            <span>📅</span> Book This Service
+          </button>
+          <button class="drawer-view-portfolio-btn" onclick="closeServiceDrawer(); document.getElementById('portfolio').scrollIntoView({behavior:'smooth'})">
+            View Portfolio →
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Portfolio -->
+<section id="portfolio">
+  <div class="services-intro reveal">
+    <div class="section-label">Our Work</div>
+    <h2 class="section-title">A Portfolio of <em>Excellence</em></h2>
+    <p class="section-sub">Each project is a story. Here's a glimpse into the worlds we've created.</p>
+  </div>
+  <div class="portfolio-tabs reveal">
+    <button class="tab-btn active" onclick="filterPortfolio('all', this)">All</button>
+    <button class="tab-btn" onclick="filterPortfolio('wedding', this)">Weddings</button>
+    <button class="tab-btn" onclick="filterPortfolio('events', this)">Events</button>
+    <button class="tab-btn" onclick="filterPortfolio('ads', this)">Ads & Promo</button>
+    <button class="tab-btn" onclick="filterPortfolio('editorial', this)">Editorial</button>
+  </div>
+  <div class="portfolio-grid" id="portfolioGrid">
+    <!-- Portfolio items are rendered dynamically by Portfolio Manager JS -->
+    <!-- Developer uploads via the ⚙️ panel; defaults shown when no uploads exist -->
+  </div>
+</section>
+
+<!-- Booking -->
+<section id="booking">
+  <div class="booking-container">
+    <div class="booking-info reveal">
+      <div class="section-label">Reserve Your Date</div>
+      <h2 class="section-title">Book Your <em>Session</em></h2>
+      <p class="section-sub">Fill in your details to check availability. Our team will reach out within 45 minutes to confirm your booking.</p>
+      <div class="booking-promise">
+        <div class="promise-item">
+          <div class="promise-icon">⚡</div>
+          <div class="promise-text">
+            <strong>45-Minute Response</strong>
+            <span>Our team will contact you within 45 minutes of your inquiry during business hours.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">🔒</div>
+          <div class="promise-text">
+            <strong>Secure Booking</strong>
+            <span>Your information is handled with complete confidentiality.</span>
+          </div>
+        </div>
+        <div class="promise-item">
+          <div class="promise-icon">✦</div>
+          <div class="promise-text">
+            <strong>Live Availability Check</strong>
+            <span>Instantly verify if your preferred date and time slot is open before submitting.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="booking-form reveal reveal-delay-2">
+      <div class="form-title">Check Availability & Book</div>
+      <div class="form-sub">Fields marked * are required. We respond within 45 minutes.</div>
+
+      <!-- Step 0: Project Scale -->
+      <div class="booking-scale-step">
+        <div class="booking-scale-title">Step 1 — Who is this booking for?</div>
+        <div class="booking-scale-cards">
+          <div class="bsc" onclick="selectBookingScale('single', this)" data-scale="single">
+            <div class="bsc-icon">👤</div>
+            <div class="bsc-name">Single Person</div>
+            <div class="bsc-hint">Portrait, solo shoot</div>
+          </div>
+          <div class="bsc" onclick="selectBookingScale('small', this)" data-scale="small">
+            <div class="bsc-icon">👨‍👩‍👧</div>
+            <div class="bsc-name">Small Event</div>
+            <div class="bsc-hint">Family, 10–50 guests</div>
+          </div>
+          <div class="bsc" onclick="selectBookingScale('medium', this)" data-scale="medium">
+            <div class="bsc-icon">🎪</div>
+            <div class="bsc-name">Medium Event</div>
+            <div class="bsc-hint">Wedding, 50–300 guests</div>
+          </div>
+          <div class="bsc" onclick="selectBookingScale('large', this)" data-scale="large">
+            <div class="bsc-icon">🏢</div>
+            <div class="bsc-name">Large Contract</div>
+            <div class="bsc-hint">Corporate, brand, campaign</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scale Badge -->
+      <div class="scale-badge-strip" id="scaleBadgeStrip">
+        <span class="sb-icon" id="sbIcon"></span>
+        <span class="sb-text" id="sbText"></span>
+        <span class="sb-sub" id="sbSub"></span>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Service Type *</label>
+        <select class="form-select" id="serviceType">
+          <option value="">Select a service...</option>
+          <option>Photoshop & Editing</option>
+          <option>Wedding Photography</option>
+          <option>Wedding Videography</option>
+          <option>Promotion Photos</option>
+          <option>Promotion Videos</option>
+          <option>Advertisement Photos</option>
+          <option>Advertisement Videos</option>
+          <option>Event Coverage (Photos)</option>
+          <option>Event Coverage (Videos)</option>
+          <option>Full Package (Photos + Videos)</option>
+        </select>
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Your Name *</label>
+          <input class="form-input" type="text" id="clientName" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Phone *</label>
+          <input class="form-input" type="tel" id="clientPhone" placeholder="+91 98765 43210">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address *</label>
+        <input class="form-input" type="email" id="clientEmail" placeholder="you@example.com">
+      </div>
+      <div class="form-row">
+        <div class="form-group">
+          <label class="form-label">Preferred Date *</label>
+          <input class="form-input" type="date" id="bookingDate">
+        </div>
+        <div class="form-group">
+          <label class="form-label">Time Slot *</label>
+          <select class="form-select" id="timeSlot">
+            <option value="">Select time...</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Event Location</label>
+        <input class="form-input" type="text" id="location" placeholder="Venue or city">
+      </div>
+
+      <!-- Small event extra fields -->
+      <div class="booking-extra-fields" id="extraSmall">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Occasion Type</label>
+            <select class="form-select" id="occasionType">
+              <option value="">Select occasion...</option>
+              <option>Birthday Party</option>
+              <option>Family Reunion</option>
+              <option>Baby Shower</option>
+              <option>Engagement</option>
+              <option>Graduation</option>
+              <option>Anniversary</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Approx. Guest Count</label>
+            <input class="form-input" type="number" id="guestCountSmall" placeholder="e.g. 25">
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium event extra fields -->
+      <div class="booking-extra-fields" id="extraMedium">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Event Type</label>
+            <select class="form-select" id="eventTypeMedium">
+              <option value="">Select type...</option>
+              <option>Wedding</option>
+              <option>Reception</option>
+              <option>Sangeet / Mehendi</option>
+              <option>Corporate Party</option>
+              <option>Product Launch</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Guest Count</label>
+            <input class="form-input" type="number" id="guestCountMedium" placeholder="e.g. 150">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Coverage Duration Needed</label>
+          <select class="form-select" id="durationMedium">
+            <option value="">Select duration...</option>
+            <option>Half Day (4 hours)</option>
+            <option>Full Day (8 hours)</option>
+            <option>2 Days</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Large contract extra fields -->
+      <div class="booking-extra-fields" id="extraLarge">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Company / Brand Name</label>
+            <input class="form-input" type="text" id="companyName" placeholder="Your company name">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Industry</label>
+            <select class="form-select" id="industry">
+              <option value="">Select industry...</option>
+              <option>Real Estate</option>
+              <option>Fashion & Apparel</option>
+              <option>Food & Beverage</option>
+              <option>Healthcare</option>
+              <option>Technology</option>
+              <option>Hospitality</option>
+              <option>Education</option>
+              <option>Other</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Estimated Budget</label>
+            <select class="form-select" id="budgetRange">
+              <option value="">Select range...</option>
+              <option>₹25,000 – ₹50,000</option>
+              <option>₹50,000 – ₹1,00,000</option>
+              <option>₹1,00,000 – ₹3,00,000</option>
+              <option>₹3,00,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Contract Duration</label>
+            <select class="form-select" id="contractDuration">
+              <option value="">Select duration...</option>
+              <option>One-Time Project</option>
+              <option>3 Months</option>
+              <option>6 Months</option>
+              <option>12 Months (Annual)</option>
+            </select>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Number of Shoot Days Required</label>
+          <select class="form-select" id="shootDays">
+            <option value="">Select...</option>
+            <option>1 Day</option>
+            <option>2–3 Days</option>
+            <option>4–7 Days</option>
+            <option>Recurring Monthly</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label">Additional Notes</label>
+        <textarea class="form-textarea" id="notes" placeholder="Tell us more about your vision, special requirements, guest count..."></textarea>
+      </div>
+
+      <!-- Live Quote Estimator -->
+      <div class="quote-estimator" id="quoteEstimator">
+        <div class="quote-est-label">✦ Live Estimate</div>
+        <div class="quote-est-amount">₹<em id="qeAmount">—</em></div>
+        <div class="quote-est-range" id="qeRange">Select service and scale for an instant estimate</div>
+        <div class="quote-est-breakdown" id="qeBreakdown"></div>
+      </div>
+
+      <div class="availability-display" id="availDisplay">
+        <div id="availMessage"></div>
+        <div class="avail-info" id="availInfo"></div>
+      </div>
+
+      <!-- Inline validation errors -->
+      <div class="field-error" id="formError">Please fill in all required fields marked with *</div>
+
+      <button class="btn-check-avail" onclick="checkAvailability()">🔍 Check Availability</button>
+      <button class="btn-book" onclick="submitBooking()">Book Now — 45 Min Response</button>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing -->
+<section id="pricing">
+  <div class="services-intro reveal">
+    <div class="section-label">Investment</div>
+    <h2 class="section-title">Transparent <em>Pricing</em></h2>
+    <p class="section-sub">Three packages crafted to suit every need. Each includes our signature quality and dedicated creative team.</p>
+  </div>
+  <div class="pricing-grid">
+    <div class="pricing-card reveal">
+      <div class="pricing-tier">Essentials</div>
+      <div class="pricing-name">Silver</div>
+      <div class="pricing-desc">Perfect for intimate events and personal projects.</div>
+      <div class="pricing-amount"><span>₹</span>15,000</div>
+      <div class="pricing-note">Starting price · Custom quotes available</div>
+      <ul class="pricing-features">
+        <li class="included">4 Hours Coverage</li>
+        <li class="included">200 Edited Photos</li>
+        <li class="included">1 Photographer</li>
+        <li class="included">Online Gallery Delivery</li>
+        <li>Cinematic Video</li>
+        <li>Drone Shots</li>
+        <li>Same-Day Highlights</li>
+      </ul>
+      <button class="btn-pricing" onclick="selectPricingPackage('silver')">Select Silver</button>
+    </div>
+    <div class="pricing-card featured reveal reveal-delay-1">
+      <div class="featured-badge">Most Popular</div>
+      <div class="pricing-tier">Professional</div>
+      <div class="pricing-name">Gold</div>
+      <div class="pricing-desc">Our most complete package for weddings and major events.</div>
+      <div class="pricing-amount"><span>₹</span>35,000</div>
+      <div class="pricing-note">Full day · All deliverables included</div>
+      <ul class="pricing-features">
+        <li class="included">8 Hours Coverage</li>
+        <li class="included">500+ Edited Photos</li>
+        <li class="included">2 Photographers</li>
+        <li class="included">Cinematic Wedding Film</li>
+        <li class="included">Drone Aerial Shots</li>
+        <li class="included">Online Gallery</li>
+        <li>Same-Day Highlights</li>
+      </ul>
+      <button class="btn-pricing" onclick="selectPricingPackage('gold')">Select Gold</button>
+    </div>
+    <div class="pricing-card reveal reveal-delay-2">
+      <div class="pricing-tier">Premium</div>
+      <div class="pricing-name">Platinum</div>
+      <div class="pricing-desc">End-to-end cinematic excellence for extraordinary occasions.</div>
+      <div class="pricing-amount"><span>₹</span>65,000</div>
+      <div class="pricing-note">Two days · Unlimited revisions</div>
+      <ul class="pricing-features">
+        <li class="included">2-Day Full Coverage</li>
+        <li class="included">1000+ Edited Photos</li>
+        <li class="included">3 Photographers + Director</li>
+        <li class="included">Feature-Length Film</li>
+        <li class="included">Drone + Gimbal Aerial</li>
+        <li class="included">Same-Day Highlights</li>
+        <li class="included">Printed Album (30 pages)</li>
+      </ul>
+      <button class="btn-pricing" onclick="selectPricingPackage('platinum')">Select Platinum</button>
+    </div>
+  </div>
+</section>
+
+<!-- Contract Offer -->
+<div id="contract">
+  <div class="contract-inner">
+    <div class="contract-text reveal">
+      <h2>Annual Contract — ₹4,000 / Month</h2>
+      <p>Lock in a dedicated creative partner for your brand. 12-month contract includes priority scheduling, unlimited small shoots, monthly content packs, and dedicated account management.</p>
+    </div>
+    <div class="contract-amount reveal reveal-delay-1"><span>₹</span>4,000<span>/mo</span></div>
+    <a href="javascript:void(0)" onclick="showModal('contractModal')" class="btn-primary reveal reveal-delay-2">Inquire About Contract</a>
+  </div>
+</div>
+
+<!-- Reviews -->
+<section id="reviews">
+  <div class="reviews-intro reveal">
+    <div class="section-label">Client Love</div>
+    <h2 class="section-title">What Our Clients <em>Say</em></h2>
+    <p class="section-sub">Every review is from a verified client who experienced our work firsthand.</p>
+  </div>
+  <div class="reviews-grid" id="reviewsGrid">
+    <div class="review-card reveal">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"LensAura captured every emotion of our wedding day. The cinematic film made us cry — in the best way. Absolute perfection. Would recommend a thousand times over."</p>
+      <div class="review-author">
+        <div class="review-avatar">👰</div>
+        <div>
+          <div class="review-name">Priya & Arjun Sharma</div>
+          <div class="review-event">Wedding · December 2024</div>
+        </div>
+        <span class="review-badge">Verified</span>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-1">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"The team responded within 30 minutes and showed up incredibly prepared. Our product launch video got 2 million views. Worth every rupee."</p>
+      <div class="review-author">
+        <div class="review-avatar">💼</div>
+        <div>
+          <div class="review-name">Rahul Mehta</div>
+          <div class="review-event">Brand Launch · March 2025</div>
+        </div>
+        <span class="review-badge">Verified</span>
+      </div>
+    </div>
+    <div class="review-card reveal reveal-delay-2">
+      <div class="review-stars">★★★★★</div>
+      <p class="review-text">"Our annual corporate gala was covered flawlessly. Hundreds of beautiful photos, a stunning highlights reel, and a team that was invisible yet everywhere at once."</p>
+      <div class="review-author">
+        <div class="review-avatar">🏢</div>
+        <div>
+          <div class="review-name">Anita Reddy</div>
+          <div class="review-event">Corporate Event · Jan 2025</div>
+        </div>
+        <span class="review-badge">Verified</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Add Review -->
+  <div class="add-review-section reveal">
+    <h3>Share Your Experience</h3>
+    <p>We'd love to hear from you. Reviews are only enabled after your session is completed and our team marks it done.</p>
+    <div class="star-rating" id="starRating">
+      <span class="star" onclick="setRating(1)" onmouseover="hoverRating(1)" onmouseout="hoverRating(0)">★</span>
+      <span class="star" onclick="setRating(2)" onmouseover="hoverRating(2)" onmouseout="hoverRating(0)">★</span>
+      <span class="star" onclick="setRating(3)" onmouseover="hoverRating(3)" onmouseout="hoverRating(0)">★</span>
+      <span class="star" onclick="setRating(4)" onmouseover="hoverRating(4)" onmouseout="hoverRating(0)">★</span>
+      <span class="star" onclick="setRating(5)" onmouseover="hoverRating(5)" onmouseout="hoverRating(0)">★</span>
+    </div>
+    <div class="form-group" style="text-align:left">
+      <label class="form-label">Your Name</label>
+      <input class="form-input" type="text" id="reviewName" placeholder="Your name">
+    </div>
+    <div class="form-group" style="text-align:left;margin-top:12px">
+      <label class="form-label">Your Review</label>
+      <textarea class="form-textarea" id="reviewText" placeholder="Share your experience with LensAura Studio..."></textarea>
+    </div>
+    <div class="form-group" style="text-align:left;margin-top:12px">
+      <label class="form-label">Service & Date</label>
+      <input class="form-input" type="text" id="reviewService" placeholder="e.g. Wedding Photography · June 2025">
+    </div>
+    <button class="btn-primary" style="margin-top:24px;width:100%" onclick="submitReview()">Submit Review</button>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact">
+  <div class="contact-inner reveal">
+    <div class="section-label">Get In Touch</div>
+    <h2 class="section-title">Let's Create Something <em>Extraordinary</em></h2>
+    <p class="section-sub" style="margin:0 auto">Ready to begin? Reach out directly or submit a booking request above. We love talking about ideas.</p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-item-label">Phone</div>
+        <div class="contact-item-value"><a href="tel:+919876543210">+91 98765 43210</a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Email</div>
+        <div class="contact-item-value"><a href="/cdn-cgi/l/email-protection#640c0108080b2408010a17051116054a0d0a"><span class="__cf_email__" data-cfemail="167e737a7a79567a73786577636477387f78">[email&#160;protected]</span></a></div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Studio</div>
+        <div class="contact-item-value">Hyderabad, Telangana</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-item-label">Hours</div>
+        <div class="contact-item-value">Mon–Sat, 9AM–8PM</div>
+      </div>
+    </div>
+    <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap">
+      <a href="#booking" class="btn-primary">Book a Session</a>
+      <a href="/cdn-cgi/l/email-protection#29414c45454669454c475a485c5b48074047" class="btn-secondary">Send an Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Lens<span>Aura</span></a>
+      <p>Professional photography and videography studio based in Hyderabad. We craft visual stories that last a lifetime.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <a href="#services">Photoshop & Editing</a>
+      <a href="#services">Wedding Films</a>
+      <a href="#services">Promotion Content</a>
+      <a href="#services">Advertisements</a>
+      <a href="#services">Event Coverage</a>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <a href="#portfolio">Portfolio</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#reviews">Reviews</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <div class="footer-col">
+      <h4>Follow</h4>
+      <a href="#">Instagram</a>
+      <a href="#">YouTube</a>
+      <a href="#">Facebook</a>
+      <a href="#">LinkedIn</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 LensAura Studio. All rights reserved.</span>
+    <span style="color:rgba(255,255,255,0.2);font-size:11px">Privacy · Terms</span>
+  </div>
+</footer>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="faq-intro reveal">
+    <div class="section-label">Common Questions</div>
+    <h2 class="section-title">Frequently <em>Asked</em></h2>
+    <p class="section-sub" style="margin:0 auto">Everything you need to know before booking.</p>
+  </div>
+  <div class="faq-grid">
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How far in advance should I book?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">For weddings and large corporate events, we recommend booking at least 3–6 months in advance to secure your preferred date. For smaller events, 2–4 weeks is usually sufficient. Our team checks availability instantly — use the booking form to see open slots in real time.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What is the 45-minute response guarantee?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">Once you submit a booking request, a member of our team will call or WhatsApp you within 45 minutes during business hours (Mon–Sat, 9AM–8PM). We use this call to confirm details, answer your questions, and lock in your booking officially.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How are the final photos and videos delivered?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">Edited photos are delivered via a private online gallery link where you can download full-resolution files directly. Videos are delivered via Google Drive or WeTransfer as high-quality MP4 files. Physical printed albums are shipped if included in your package.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Do you travel outside Hyderabad?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">Absolutely. We cover destination weddings and events across India and internationally. Travel and accommodation costs are added separately and discussed transparently during your consultation. We have worked in Mumbai, Delhi, Goa, Dubai, Singapore, and more.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What is your cancellation and rescheduling policy?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">Bookings can be rescheduled up to 14 days before the event at no charge. Cancellations made 30+ days prior receive a full refund of any advance paid. Cancellations within 14 days are subject to a 50% holding fee. Large contract clients have customised terms discussed at signing.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-2">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        Can I request specific editing styles or references?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">Yes — and we encourage it. Before any shoot or edit, you can share Pinterest boards, Instagram references, colour palette preferences, and detailed notes about your vision. Our editors use these as a guide while ensuring the final result feels cohesive and true to our studio's quality standard.</div>
+    </div>
+    <div class="faq-item reveal">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        What does the ₹4,000/month contract include?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">The annual contract at ₹4,000/month is designed for brands, restaurants, and businesses needing consistent visual content. It includes: priority scheduling, up to 2 small shoots per month (2 hours each), 40 edited photos monthly, 1 short-form video reel monthly, and a dedicated account manager. Custom contracts are also available.</div>
+    </div>
+    <div class="faq-item reveal reveal-delay-1">
+      <button class="faq-q" onclick="toggleFaq(this)">
+        How do I leave a review after my shoot?
+        <span class="faq-chevron">+</span>
+      </button>
+      <div class="faq-a">After your booking is marked "Completed" by our team, you can leave a review directly on this website in the Reviews section. We ask that reviews are honest and based on your real experience. Verified reviews are approved and published within 24 hours.</div>
+    </div>
+  </div>
+</section>
+
+<!-- WhatsApp Float -->
+<a id="whatsapp-float" href="https://wa.me/919876543210?text=Hi%20LensAura%20Studio!%20I'd%20like%20to%20enquire%20about%20your%20services." target="_blank" rel="noopener">
+  💬
+  <span class="wa-tooltip">Chat on WhatsApp</span>
+</a>
+
+<!-- Contract Inquiry Modal -->
+<div class="modal-overlay" id="contractModal">
+  <div class="modal-box" style="max-width:580px;text-align:left">
+    <div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:24px">
+      <div>
+        <div class="form-title">Annual <em style="font-style:italic;color:var(--accent)">Contract</em></div>
+        <div class="form-sub" style="margin-bottom:0">₹4,000/month · 12-month partnership</div>
+      </div>
+      <button class="modal-close" style="width:36px;height:36px;padding:0;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0" onclick="closeModal('contractModal')">✕</button>
+    </div>
+    <div class="contract-price-display">
+      <div class="cpd-amount">₹4,000</div>
+      <div class="cpd-period">/month</div>
+      <div class="cpd-note">Billed annually<br>₹48,000 total · Save ₹12,000</div>
+    </div>
+    <div class="contract-perks">
+      <div class="contract-perks-title">What's Included Every Month</div>
+      <div class="contract-perk">Priority scheduling — your dates blocked first</div>
+      <div class="contract-perk">2 shoots per month (up to 2 hours each)</div>
+      <div class="contract-perk">40 professionally edited photos</div>
+      <div class="contract-perk">1 short-form video reel (60 seconds)</div>
+      <div class="contract-perk">Dedicated account manager</div>
+      <div class="contract-perk">Unlimited Photoshop retouching requests</div>
+      <div class="contract-perk">Monthly content strategy call (30 min)</div>
+    </div>
+    <div class="contract-modal-grid">
+      <div class="form-group">
+        <label class="form-label">Your Name *</label>
+        <input class="form-input" type="text" id="contractName" placeholder="Full name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Phone *</label>
+        <input class="form-input" type="tel" id="contractPhone" placeholder="+91 98765 43210">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Brand / Company *</label>
+        <input class="form-input" type="text" id="contractBrand" placeholder="Your brand name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Industry</label>
+        <select class="form-select" id="contractIndustry">
+          <option value="">Select...</option>
+          <option>Food & Beverage</option>
+          <option>Fashion & Retail</option>
+          <option>Real Estate</option>
+          <option>Technology</option>
+          <option>Healthcare</option>
+          <option>Hospitality</option>
+          <option>Other</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group" style="margin-bottom:20px">
+      <label class="form-label">Tell us about your content needs</label>
+      <textarea class="form-textarea" id="contractNotes" placeholder="What type of content do you need? Any specific shoot styles, locations, or platforms?" style="min-height:80px"></textarea>
+    </div>
+    <button class="btn-book" style="width:100%;border-radius:14px" onclick="submitContractInquiry()">📞 Request a Call — We'll reach out within 45 minutes</button>
+  </div>
+</div>
+
+<!-- Dev Trigger -->
+<div id="dev-trigger" title="Developer Panel" onclick="toggleDevPanel()">⚙️</div>
+
+<!-- Dev Panel -->
+<div id="dev-panel">
+  <div class="dev-header">
+    <h2>⚙️ Developer Dashboard</h2>
+    <button class="dev-close" onclick="toggleDevPanel()">✕</button>
+  </div>
+  <div class="dev-content">
+    <!-- Analytics Overview -->
+    <div class="dev-analytics" id="devAnalytics">
+      <h3>📊 Overview</h3>
+      <div class="analytics-grid">
+        <div class="analytics-card">
+          <div class="analytics-val blue" id="anTotal">0</div>
+          <div class="analytics-lbl">Total Bookings</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-val orange" id="anPending">0</div>
+          <div class="analytics-lbl">Pending / New</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-val green" id="anCompleted">0</div>
+          <div class="analytics-lbl">Completed</div>
+        </div>
+        <div class="analytics-card">
+          <div class="analytics-val accent" id="anRevenue">₹0</div>
+          <div class="analytics-lbl">Est. Revenue</div>
+        </div>
+      </div>
+    </div>
+    <div class="dev-grid">
+      <!-- Booking Requests -->
+      <div class="dev-section">
+        <h3>📋 Booking Requests</h3>
+        <table class="dev-table" id="devBookingTable">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Service</th>
+              <th>Scale</th>
+              <th>Date</th>
+              <th>Time</th>
+              <th>Status</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="devBookingBody">
+            <tr><td colspan="7" style="color:var(--muted);text-align:center;padding:24px">No bookings yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Availability Manager -->
+      <div class="dev-section slot-manager">
+        <h3>📅 Availability Manager</h3>
+        <div class="form-group" style="margin-bottom:16px">
+          <label class="form-label">Select Date to Manage</label>
+          <input class="form-input" type="date" id="devDatePicker" onchange="loadDevSlots()">
+        </div>
+        <div class="slot-grid" id="devSlotGrid">
+          <div style="color:var(--muted);font-size:13px;grid-column:span 3;text-align:center;padding:20px">Select a date above</div>
+        </div>
+      </div>
+
+      <!-- Contact Details Submitted -->
+      <div class="dev-section">
+        <h3>📇 Contact Details</h3>
+        <table class="dev-table">
+          <thead>
+            <tr><th>Name</th><th>Phone</th><th>Email</th><th>Location</th></tr>
+          </thead>
+          <tbody id="devContactBody">
+            <tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">No contacts yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Reviews Manager -->
+      <div class="dev-section">
+        <h3>⭐ Reviews</h3>
+        <table class="dev-table">
+          <thead>
+            <tr><th>Name</th><th>Rating</th><th>Service</th><th>Status</th></tr>
+          </thead>
+          <tbody id="devReviewBody">
+            <tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">No reviews yet</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Portfolio Manager — full width, tabbed by category -->
+      <div class="dev-section pm-section">
+        <h3>🖼️ Portfolio Manager</h3>
+
+        <!-- Category Tabs -->
+        <div class="pm-cat-tabs">
+          <button class="pm-cat-tab active" onclick="switchPmTab('all',this)">
+            <span>🗂️</span> All
+            <span class="pm-tab-count" id="pmCnt-all">0</span>
+          </button>
+          <button class="pm-cat-tab" onclick="switchPmTab('wedding',this)">
+            <span>💍</span> Weddings
+            <span class="pm-tab-count" id="pmCnt-wedding">0</span>
+          </button>
+          <button class="pm-cat-tab" onclick="switchPmTab('events',this)">
+            <span>🎪</span> Events
+            <span class="pm-tab-count" id="pmCnt-events">0</span>
+          </button>
+          <button class="pm-cat-tab" onclick="switchPmTab('ads',this)">
+            <span>📺</span> Ads &amp; Promo
+            <span class="pm-tab-count" id="pmCnt-ads">0</span>
+          </button>
+          <button class="pm-cat-tab" onclick="switchPmTab('editorial',this)">
+            <span>📸</span> Editorial
+            <span class="pm-tab-count" id="pmCnt-editorial">0</span>
+          </button>
+        </div>
+
+        <!-- ALL tab — overview only, no upload -->
+        <div class="pm-tab-panel active" id="pmPanel-all">
+          <div class="pm-all-grid" id="pmAllGrid">
+            <div class="pm-empty">No portfolio items uploaded yet. Switch to a category tab to upload.</div>
+          </div>
+        </div>
+
+        <!-- WEDDINGS tab -->
+        <div class="pm-tab-panel" id="pmPanel-wedding">
+          <div class="pm-cat-upload-zone" data-cat="wedding">
+            <input type="file" accept="image/*,video/*" multiple onchange="handleCatFiles('wedding',this.files)" class="pm-file-input">
+            <div class="pm-upload-icon">💍</div>
+            <div class="pm-upload-title">Upload Wedding Photos &amp; Videos</div>
+            <div class="pm-upload-sub">Drag &amp; drop or click · JPG, PNG, MP4, MOV · Max 10MB each</div>
+          </div>
+          <div class="pm-pending-bar" id="pmPending-wedding" style="display:none"></div>
+          <div class="pm-inline-form" id="pmForm-wedding" style="display:none">
+            <div class="pm-inline-thumb" id="pmThumb-wedding"></div>
+            <div class="pm-inline-fields">
+              <input class="form-input" type="text" id="pmTitle-wedding" placeholder="Caption e.g. Wedding · Grand Ballroom Hyderabad">
+              <button class="pm-add-btn" onclick="commitItem('wedding')">+ Add to Weddings</button>
+            </div>
+          </div>
+          <div class="pm-items-grid" id="pmList-wedding">
+            <div class="pm-empty">No wedding items yet. Upload above.</div>
+          </div>
+        </div>
+
+        <!-- EVENTS tab -->
+        <div class="pm-tab-panel" id="pmPanel-events">
+          <div class="pm-cat-upload-zone" data-cat="events">
+            <input type="file" accept="image/*,video/*" multiple onchange="handleCatFiles('events',this.files)" class="pm-file-input">
+            <div class="pm-upload-icon">🎪</div>
+            <div class="pm-upload-title">Upload Event Photos &amp; Videos</div>
+            <div class="pm-upload-sub">Drag &amp; drop or click · JPG, PNG, MP4, MOV · Max 10MB each</div>
+          </div>
+          <div class="pm-pending-bar" id="pmPending-events" style="display:none"></div>
+          <div class="pm-inline-form" id="pmForm-events" style="display:none">
+            <div class="pm-inline-thumb" id="pmThumb-events"></div>
+            <div class="pm-inline-fields">
+              <input class="form-input" type="text" id="pmTitle-events" placeholder="Caption e.g. Events · Corporate Gala 2025">
+              <button class="pm-add-btn" onclick="commitItem('events')">+ Add to Events</button>
+            </div>
+          </div>
+          <div class="pm-items-grid" id="pmList-events">
+            <div class="pm-empty">No event items yet. Upload above.</div>
+          </div>
+        </div>
+
+        <!-- ADS & PROMO tab -->
+        <div class="pm-tab-panel" id="pmPanel-ads">
+          <div class="pm-cat-upload-zone" data-cat="ads">
+            <input type="file" accept="image/*,video/*" multiple onchange="handleCatFiles('ads',this.files)" class="pm-file-input">
+            <div class="pm-upload-icon">📺</div>
+            <div class="pm-upload-title">Upload Ad &amp; Promo Photos &amp; Videos</div>
+            <div class="pm-upload-sub">Drag &amp; drop or click · JPG, PNG, MP4, MOV · Max 10MB each</div>
+          </div>
+          <div class="pm-pending-bar" id="pmPending-ads" style="display:none"></div>
+          <div class="pm-inline-form" id="pmForm-ads" style="display:none">
+            <div class="pm-inline-thumb" id="pmThumb-ads"></div>
+            <div class="pm-inline-fields">
+              <input class="form-input" type="text" id="pmTitle-ads" placeholder="Caption e.g. Brand Campaign · Product Reel">
+              <button class="pm-add-btn" onclick="commitItem('ads')">+ Add to Ads &amp; Promo</button>
+            </div>
+          </div>
+          <div class="pm-items-grid" id="pmList-ads">
+            <div class="pm-empty">No ads &amp; promo items yet. Upload above.</div>
+          </div>
+        </div>
+
+        <!-- EDITORIAL tab -->
+        <div class="pm-tab-panel" id="pmPanel-editorial">
+          <div class="pm-cat-upload-zone" data-cat="editorial">
+            <input type="file" accept="image/*,video/*" multiple onchange="handleCatFiles('editorial',this.files)" class="pm-file-input">
+            <div class="pm-upload-icon">📸</div>
+            <div class="pm-upload-title">Upload Editorial Photos &amp; Videos</div>
+            <div class="pm-upload-sub">Drag &amp; drop or click · JPG, PNG, MP4, MOV · Max 10MB each</div>
+          </div>
+          <div class="pm-pending-bar" id="pmPending-editorial" style="display:none"></div>
+          <div class="pm-inline-form" id="pmForm-editorial" style="display:none">
+            <div class="pm-inline-thumb" id="pmThumb-editorial"></div>
+            <div class="pm-inline-fields">
+              <input class="form-input" type="text" id="pmTitle-editorial" placeholder="Caption e.g. Portrait · Editorial Shoot">
+              <button class="pm-add-btn" onclick="commitItem('editorial')">+ Add to Editorial</button>
+            </div>
+          </div>
+          <div class="pm-items-grid" id="pmList-editorial">
+            <div class="pm-empty">No editorial items yet. Upload above.</div>
+          </div>
+        </div>
+
+        <!-- Sync notice -->
+        <div style="margin-top:20px;padding:12px 16px;background:rgba(48,209,88,0.06);border:1px solid rgba(48,209,88,0.2);border-radius:10px;font-size:12px;color:#30d158">
+          ✓ All uploads sync instantly to the public portfolio on the homepage — no refresh needed
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- Booking Success Modal -->
+<div class="modal-overlay" id="bookingModal">
+  <div class="modal-box">
+    <div class="modal-icon">✅</div>
+    <div class="modal-title">You're All Set!</div>
+    <div class="modal-desc" id="modalDesc">Your booking request has been received. Our team will contact you within <strong>45 minutes</strong> to confirm your session details.</div>
+    <div id="bookingRefDisplay" style="margin-bottom:20px;padding:12px 20px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.2);border-radius:12px;font-size:13px;color:var(--muted)">Booking Ref: <strong id="bookingRefNum" style="color:var(--accent);font-size:15px;letter-spacing:0.1em"></strong></div>
+    <button class="modal-close" onclick="closeModal('bookingModal'); resetBookingForm()">Done</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="reviewModal">
+  <div class="modal-box">
+    <div class="modal-icon">🌟</div>
+    <div class="modal-title">Thank You!</div>
+    <div class="modal-desc">Your review has been submitted and will be displayed after verification. We truly appreciate your feedback.</div>
+    <button class="modal-close" onclick="closeModal('reviewModal')">Done</button>
+  </div>
+</div>
+
+<div class="modal-overlay" id="contractSuccessModal">
+  <div class="modal-box">
+    <div class="modal-icon">🤝</div>
+    <div class="modal-title">Inquiry Received!</div>
+    <div class="modal-desc">Thank you for your interest in our Annual Contract. A senior team member will call you within <strong>45 minutes</strong> to discuss your brand's needs and walk you through the partnership.</div>
+    <button class="modal-close" onclick="closeModal('contractSuccessModal')">Done</button>
+  </div>
+</div>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ─── DATA ───────────────────────────────────────────────────────────────────
+const ALL_SLOTS = [
+  '09:00 AM','10:00 AM','11:00 AM','12:00 PM',
+  '01:00 PM','02:00 PM','03:00 PM','04:00 PM',
+  '05:00 PM','06:00 PM'
+];
+
+// Initialize availability: all slots available by default
+let availability = JSON.parse(localStorage.getItem('la_availability') || '{}');
+let bookings = JSON.parse(localStorage.getItem('la_bookings') || '[]');
+let reviews = JSON.parse(localStorage.getItem('la_reviews') || '[]');
+
+function saveData() {
+  localStorage.setItem('la_availability', JSON.stringify(availability));
+  localStorage.setItem('la_bookings', JSON.stringify(bookings));
+  localStorage.setItem('la_reviews', JSON.stringify(reviews));
+}
+
+// ─── CURSOR ──────────────────────────────────────────────────────────────────
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => {
+  mx = e.clientX; my = e.clientY;
+  cursor.style.left = mx - 6 + 'px';
+  cursor.style.top = my - 6 + 'px';
+});
+function animRing() {
+  rx += (mx - rx) * 0.12;
+  ry += (my - ry) *.12;
+  ring.style.left = rx - 20 + 'px';
+  ring.style.top = ry - 20 + 'px';
+  requestAnimationFrame(animRing);
+}
+animRing();
+document.querySelectorAll('a,button,.service-card,.portfolio-item,.review-card,.pricing-card,.slot-pill,.star,.tab-btn').forEach(el => {
+  el.addEventListener('mouseenter', () => {
+    cursor.style.transform = 'scale(2)';
+    ring.style.width = '60px'; ring.style.height = '60px';
+    ring.style.borderColor = 'rgba(160,120,64,0.8)';
+  });
+  el.addEventListener('mouseleave', () => {
+    cursor.style.transform = 'scale(1)';
+    ring.style.width = '40px'; ring.style.height = '40px';
+    ring.style.borderColor = 'rgba(160,120,64,0.45)';
+  });
+});
+
+// ─── SCROLL REVEAL ───────────────────────────────────────────────────────────
+const revealEls = document.querySelectorAll('.reveal');
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); io.unobserve(e.target); } });
+}, { threshold: 0.1 });
+revealEls.forEach(el => io.observe(el));
+
+// ─── NAV SCROLL ──────────────────────────────────────────────────────────────
+window.addEventListener('scroll', () => {
+  document.querySelector('nav').style.background = 
+    window.scrollY > 50 ? 'rgba(250,249,247,0.97)' : 'rgba(250,249,247,0.88)';
+});
+
+// ─── PORTFOLIO FILTER — handled by Portfolio Manager below ───────────────────
+
+// ─── PROJECT SCALE (BOOKING FORM) ────────────────────────────────────────────
+let currentBookingScale = '';
+
+const SCALE_META = {
+  single: { icon: '👤', text: 'Single Person', sub: 'Personal / Solo shoot — simplified booking', hint: '1–2 hours · 1 photographer' },
+  small:  { icon: '👨‍👩‍👧', text: 'Small Event',   sub: '10–50 guests · family or small gathering', hint: '2–4 hours · 1–2 photographers' },
+  medium: { icon: '🎪', text: 'Medium Event',  sub: 'Wedding or event · 50–300 guests', hint: '4–10 hours · 2–3 photographers' },
+  large:  { icon: '🏢', text: 'Large Contract', sub: 'Corporate · brand · recurring campaign', hint: 'Custom timeline · full team' }
+};
+
+function selectBookingScale(scale, el) {
+  currentBookingScale = scale;
+  document.querySelectorAll('.bsc').forEach(b => b.classList.remove('active'));
+  el.classList.add('active');
+
+  // hide all extra fields first
+  ['extraSmall','extraMedium','extraLarge'].forEach(id => {
+    document.getElementById(id).classList.remove('show');
+  });
+
+  // show relevant extra fields
+  if (scale === 'small')  document.getElementById('extraSmall').classList.add('show');
+  if (scale === 'medium') document.getElementById('extraMedium').classList.add('show');
+  if (scale === 'large')  document.getElementById('extraLarge').classList.add('show');
+
+  // show badge
+  const m = SCALE_META[scale];
+  const strip = document.getElementById('scaleBadgeStrip');
+  document.getElementById('sbIcon').textContent = m.icon;
+  document.getElementById('sbText').textContent = m.text + ' — ' + m.sub;
+  document.getElementById('sbSub').textContent = m.hint;
+  strip.classList.add('show');
+}
+
+// ─── PROJECT SCALE (SERVICE DRAWER) ──────────────────────────────────────────
+let currentDrawerScale = '';
+
+const DRAWER_SCALE_DATA = {
+  photoshop: {
+    single: { team:'1 Editor', time:'12–24 hrs', photos:'Up to 20', price:'From ₹2,000' },
+    medium: { team:'1–2 Editors', time:'24–48 hrs', photos:'Up to 150', price:'From ₹5,000' },
+    large:  { team:'Full Edit Team', time:'48–72 hrs', photos:'Unlimited batch', price:'From ₹15,000' }
+  },
+  wedding: {
+    single: { team:'1 Photographer', time:'2–4 hrs', photos:'50–100 edited', price:'From ₹8,000' },
+    medium: { team:'1–2 Photographers', time:'5–8 hrs', photos:'200–400 edited', price:'From ₹25,000' },
+    large:  { team:'3 Photographers + Director', time:'Full 2-day', photos:'800–1200 + Film', price:'From ₹65,000' }
+  },
+  promotion: {
+    single: { team:'1 Photographer', time:'1–2 hrs', photos:'30–60 edited', price:'From ₹5,000' },
+    medium: { team:'2 Creatives', time:'Half day', photos:'100+ · 2–3 reels', price:'From ₹15,000' },
+    large:  { team:'Full Production Crew', time:'1–3 days', photos:'Campaign pack', price:'From ₹40,000' }
+  },
+  ads: {
+    single: { team:'1 Videographer', time:'Half day', photos:'1 x 30s Ad', price:'From ₹10,000' },
+    medium: { team:'2–3 Crew', time:'Full day', photos:'2–3 Ad variants', price:'From ₹25,000' },
+    large:  { team:'Full Production', time:'2–5 days', photos:'Multi-platform campaign', price:'From ₹60,000' }
+  },
+  events: {
+    single: { team:'1 Photographer', time:'2–3 hrs', photos:'60–100 photos', price:'From ₹6,000' },
+    medium: { team:'2 Photo + 1 Video', time:'4–8 hrs', photos:'200+ · highlight reel', price:'From ₹20,000' },
+    large:  { team:'Multi-cam team (4–6)', time:'Full event', photos:'Full coverage + film', price:'From ₹50,000' }
+  },
+  creative: {
+    single: { team:'1 Director', time:'Half day', photos:'Concept shoot', price:'From ₹15,000' },
+    medium: { team:'Director + 2 crew', time:'1–2 days', photos:'Brand shoot pack', price:'From ₹35,000' },
+    large:  { team:'Full creative dept.', time:'2–6 weeks', photos:'Campaign + assets', price:'From ₹80,000' }
+  }
+};
+
+function selectDrawerScale(scale, el) {
+  currentDrawerScale = scale;
+  document.querySelectorAll('.scale-pill').forEach(p => p.classList.remove('selected'));
+  el.classList.add('selected');
+
+  const key = currentServiceKey;
+  const data = (DRAWER_SCALE_DATA[key] || {})[scale];
+  if (!data) return;
+
+  const detail = document.getElementById('drawerScaleDetail');
+  document.getElementById('drawerScaleGrid').innerHTML = `
+    <div class="scale-detail-item"><div class="val">${data.team}</div><div class="lbl">Team Size</div></div>
+    <div class="scale-detail-item"><div class="val">${data.time}</div><div class="lbl">Duration</div></div>
+    <div class="scale-detail-item"><div class="val">${data.photos}</div><div class="lbl">Deliverables</div></div>
+    <div class="scale-detail-item" style="grid-column:span 3;margin-top:8px;padding-top:12px;border-top:1px solid var(--border)">
+      <div class="val" style="color:var(--accent);font-size:20px">${data.price}</div>
+      <div class="lbl">Estimated Starting Price for This Scale</div>
+    </div>`;
+  detail.classList.add('show');
+}
+
+// ─── DATE → TIME SLOTS ───────────────────────────────────────────────────────
+document.getElementById('bookingDate').addEventListener('change', function() {
+  const date = this.value;
+  const sel = document.getElementById('timeSlot');
+  sel.innerHTML = '<option value="">Select time...</option>';
+  const bookedSlots = (availability[date] || {});
+  ALL_SLOTS.forEach(slot => {
+    const opt = document.createElement('option');
+    opt.value = slot;
+    opt.textContent = slot + (bookedSlots[slot] === 'booked' ? ' — Booked' : ' — Available');
+    if (bookedSlots[slot] === 'booked') opt.disabled = true;
+    sel.appendChild(opt);
+  });
+  document.getElementById('availDisplay').classList.remove('show');
+});
+
+// ─── CHECK AVAILABILITY ──────────────────────────────────────────────────────
+function checkAvailability() {
+  const date = document.getElementById('bookingDate').value;
+  const slot = document.getElementById('timeSlot').value;
+  const display = document.getElementById('availDisplay');
+  const msg = document.getElementById('availMessage');
+  const info = document.getElementById('availInfo');
+  if (!date || !slot) {
+    display.classList.add('show');
+    msg.innerHTML = '<span class="avail-booked">⚠️ Please select a date and time slot first.</span>';
+    info.textContent = '';
+    return;
+  }
+  const slotStatus = (availability[date] || {})[slot];
+  const isBooked = slotStatus === 'booked';
+  display.classList.add('show');
+  if (!isBooked) {
+    msg.innerHTML = '<span class="avail-available">✅ Available!</span>';
+    info.textContent = `${slot} on ${new Date(date).toDateString()} is open. You can proceed with your booking.`;
+  } else {
+    msg.innerHTML = '<span class="avail-booked">❌ Not Available</span>';
+    info.textContent = `This slot is already booked. Please select another date or time.`;
+  }
+}
+
+// ─── SUBMIT BOOKING ──────────────────────────────────────────────────────────
+function submitBooking() {
+  const name = document.getElementById('clientName').value.trim();
+  const phone = document.getElementById('clientPhone').value.trim();
+  const email = document.getElementById('clientEmail').value.trim();
+  const service = document.getElementById('serviceType').value;
+  const date = document.getElementById('bookingDate').value;
+  const slot = document.getElementById('timeSlot').value;
+  const location = document.getElementById('location').value.trim();
+  const notes = document.getElementById('notes').value.trim();
+
+  if (!name || !phone || !email || !service || !date || !slot) {
+    alert('Please fill in all required fields (*).');
+    return;
+  }
+  // Check if still available
+  if ((availability[date] || {})[slot] === 'booked') {
+    alert('This slot was just booked. Please choose another time.');
+    return;
+  }
+  // Mark slot as booked
+  if (!availability[date]) availability[date] = {};
+  availability[date][slot] = 'booked';
+
+  // Gather scale-specific extra fields
+  let extraData = {};
+  if (currentBookingScale === 'small') {
+    extraData = { occasionType: document.getElementById('occasionType')?.value, guestCount: document.getElementById('guestCountSmall')?.value };
+  } else if (currentBookingScale === 'medium') {
+    extraData = { eventType: document.getElementById('eventTypeMedium')?.value, guestCount: document.getElementById('guestCountMedium')?.value, duration: document.getElementById('durationMedium')?.value };
+  } else if (currentBookingScale === 'large') {
+    extraData = { company: document.getElementById('companyName')?.value, industry: document.getElementById('industry')?.value, budget: document.getElementById('budgetRange')?.value, contractDuration: document.getElementById('contractDuration')?.value, shootDays: document.getElementById('shootDays')?.value };
+  }
+
+  const booking = {
+    id: Date.now(),
+    name, phone, email, service, date, slot, location, notes,
+    scale: currentBookingScale || 'not specified',
+    extraData,
+    status: 'new',
+    created: new Date().toISOString()
+  };
+  bookings.unshift(booking);
+  saveData();
+
+  document.getElementById('modalDesc').innerHTML = 
+    `<strong>${name}</strong>, your request for <strong>${service}</strong> on <strong>${new Date(date).toDateString()} at ${slot}</strong> has been received.<br><br>Our team will call <strong>${phone}</strong> within <strong>45 minutes</strong>.`;
+  showModal('bookingModal');
+  refreshDevPanel();
+}
+
+// ─── STAR RATING ─────────────────────────────────────────────────────────────
+let selectedRating = 0;
+function hoverRating(n) {
+  document.querySelectorAll('.star').forEach((s, i) => {
+    s.classList.toggle('active', i < (n || selectedRating));
+  });
+}
+function setRating(n) { selectedRating = n; hoverRating(n); }
+
+// ─── SUBMIT REVIEW ───────────────────────────────────────────────────────────
+function submitReview() {
+  const name = document.getElementById('reviewName').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+  const service = document.getElementById('reviewService').value.trim();
+  if (!name || !text || !selectedRating) {
+    alert('Please add your name, review, and rating.');
+    return;
+  }
+  const review = { id: Date.now(), name, text, service, rating: selectedRating, status: 'pending', date: new Date().toISOString() };
+  reviews.unshift(review);
+  saveData();
+  showModal('reviewModal');
+  document.getElementById('reviewName').value = '';
+  document.getElementById('reviewText').value = '';
+  document.getElementById('reviewService').value = '';
+  selectedRating = 0; hoverRating(0);
+  refreshDevPanel();
+}
+
+// ─── MODALS ──────────────────────────────────────────────────────────────────
+function showModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
+// ─── DEV PANEL ───────────────────────────────────────────────────────────────
+function toggleDevPanel() {
+  const p = document.getElementById('dev-panel');
+  p.classList.toggle('open');
+  if (p.classList.contains('open')) { refreshDevPanel(); renderDevPortfolioList(); }
+}
+
+function refreshDevPanel() {
+  const SCALE_ICONS = { single:'👤', small:'👨‍👩‍👧', medium:'🎪', large:'🏢', 'not specified':'—' };
+  const SCALE_LABELS = { single:'Solo', small:'Small', medium:'Medium', large:'Corporate', 'not specified':'—' };
+
+  // Bookings table
+  const tbody = document.getElementById('devBookingBody');
+  if (bookings.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="7" style="color:var(--muted);text-align:center;padding:24px">No bookings yet</td></tr>';
+  } else {
+    tbody.innerHTML = bookings.map(b => {
+      const scaleKey = b.scale || 'not specified';
+      const extra = b.extraData || {};
+      const extraStr = Object.entries(extra).filter(([,v])=>v).map(([k,v])=>`${k}: ${v}`).join(' · ');
+      return `<tr>
+        <td><strong>${b.name}</strong><br><span style="color:var(--muted);font-size:11px">${b.phone}</span></td>
+        <td style="font-size:12px">${b.service}</td>
+        <td style="font-size:12px">
+          <span style="font-size:14px">${SCALE_ICONS[scaleKey]||'—'}</span>
+          <span style="color:var(--accent);font-weight:500;font-size:11px;margin-left:4px">${SCALE_LABELS[scaleKey]||scaleKey}</span>
+          ${extraStr ? `<br><span style="color:var(--muted);font-size:10px;line-height:1.4;display:block;margin-top:2px">${extraStr}</span>` : ''}
+        </td>
+        <td style="font-size:12px">${new Date(b.date).toDateString()}</td>
+        <td style="font-size:12px">${b.slot}</td>
+        <td><select onchange="updateBookingStatus(${b.id},this.value)" style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--fg);padding:4px 8px;font-size:11px;cursor:none">
+          ${['new','pending','confirmed','completed'].map(s=>`<option value="${s}" ${b.status===s?'selected':''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('')}
+        </select></td>
+        <td><button onclick="deleteBooking(${b.id})" style="background:rgba(255,69,58,0.15);border:1px solid rgba(255,69,58,0.3);border-radius:6px;color:#ff453a;padding:4px 10px;font-size:11px;cursor:none">Delete</button></td>
+      </tr>`;
+    }).join('');
+  }
+
+  // Contact table
+  const ctbody = document.getElementById('devContactBody');
+  if (bookings.length === 0) {
+    ctbody.innerHTML = '<tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">No contacts yet</td></tr>';
+  } else {
+    ctbody.innerHTML = bookings.map(b => `
+      <tr>
+        <td>${b.name}</td>
+        <td>${b.phone}</td>
+        <td style="font-size:12px">${b.email}</td>
+        <td style="font-size:12px">${b.location || '—'}</td>
+      </tr>
+    `).join('');
+  }
+
+  // Reviews table
+  const rvbody = document.getElementById('devReviewBody');
+  if (reviews.length === 0) {
+    rvbody.innerHTML = '<tr><td colspan="4" style="color:var(--muted);text-align:center;padding:24px">No reviews yet</td></tr>';
+  } else {
+    rvbody.innerHTML = reviews.map(r => `
+      <tr>
+        <td>${r.name}</td>
+        <td>${'★'.repeat(r.rating)}</td>
+        <td style="font-size:12px">${r.service || '—'}</td>
+        <td><select onchange="updateReviewStatus(${r.id},this.value)" style="background:var(--card2);border:1px solid var(--border);border-radius:6px;color:var(--fg);padding:4px 8px;font-size:11px;cursor:none">
+          ${['pending','approved','rejected'].map(s=>`<option value="${s}" ${r.status===s?'selected':''}>${s.charAt(0).toUpperCase()+s.slice(1)}</option>`).join('')}
+        </select></td>
+      </tr>
+    `).join('');
+  }
+}
+
+function updateBookingStatus(id, status) {
+  const b = bookings.find(x => x.id === id);
+  if (b) { b.status = status; saveData(); }
+}
+function deleteBooking(id) {
+  bookings = bookings.filter(x => x.id !== id);
+  saveData(); refreshDevPanel();
+}
+function updateReviewStatus(id, status) {
+  const r = reviews.find(x => x.id === id);
+  if (r) { r.status = status; saveData(); refreshDevPanel(); }
+}
+
+// ─── DEV SLOT MANAGER ────────────────────────────────────────────────────────
+function loadDevSlots() {
+  const date = document.getElementById('devDatePicker').value;
+  const grid = document.getElementById('devSlotGrid');
+  if (!date) { grid.innerHTML = '<div style="color:var(--muted);font-size:13px;grid-column:span 3;text-align:center;padding:20px">Select a date above</div>'; return; }
+  if (!availability[date]) availability[date] = {};
+  grid.innerHTML = ALL_SLOTS.map(slot => {
+    const status = availability[date][slot] || 'available';
+    const isBooked = status === 'booked';
+    return `<div class="slot-pill ${isBooked ? 'booked' : 'available'}">
+      <span class="slot-time">${slot}</span>
+      <span class="slot-status">${isBooked ? 'Booked' : 'Available'}</span>
+      <button class="slot-toggle-btn" onclick="toggleSlot('${date}','${slot}',this)">${isBooked ? 'Set Free' : 'Block'}</button>
+    </div>`;
+  }).join('');
+}
+
+function toggleSlot(date, slot, btn) {
+  if (!availability[date]) availability[date] = {};
+  const current = availability[date][slot] || 'available';
+  availability[date][slot] = current === 'booked' ? 'available' : 'booked';
+  saveData();
+  loadDevSlots();
+  // Refresh time slot dropdown if same date selected on booking form
+  const bookDate = document.getElementById('bookingDate').value;
+  if (bookDate === date) {
+    document.getElementById('bookingDate').dispatchEvent(new Event('change'));
+  }
+}
+
+// ─── COUNTER ANIMATION ───────────────────────────────────────────────────────
+function animateCounters() {
+  document.querySelectorAll('.stat-number').forEach(el => {
+    const text = el.innerHTML;
+    const num = parseFloat(text.replace(/[^0-9.]/g,''));
+    if (!num) return;
+    let start = 0, duration = 1800;
+    const step = timestamp => {
+      if (!start) start = timestamp;
+      const prog = Math.min((timestamp - start) / duration, 1);
+      const val = Math.floor(prog * num);
+      el.innerHTML = text.replace(/[0-9]+/, val);
+      if (prog < 1) requestAnimationFrame(step);
+      else el.innerHTML = text;
+    };
+    requestAnimationFrame(step);
+  });
+}
+const statsIO = new IntersectionObserver(e => {
+  if (e[0].isIntersecting) { animateCounters(); statsIO.disconnect(); }
+}, { threshold: 0.5 });
+statsIO.observe(document.querySelector('.stats-strip'));
+
+// Set min date to today
+const today = new Date().toISOString().split('T')[0];
+document.getElementById('bookingDate').min = today;
+document.getElementById('devDatePicker').min = today;
+
+// ─── SERVICE DRAWER DATA ─────────────────────────────────────────────────────
+const SERVICE_DATA = {
+  photoshop: {
+    icon: '🎭', title: 'Photoshop &<br><em>Editing</em>',
+    subtitle: 'Post-Production · Retouching · Color Grading',
+    bookingValue: 'Photoshop & Editing',
+    desc: 'Every great photograph deserves an equally great finish. Our post-production team combines technical mastery with artistic sensitivity — from subtle skin retouching to full composite artwork, all handled with precision and care.',
+    features: ['Skin Retouching & Smoothing','Color Grading & LUTs','Background Removal / Swap','Object Removal & Cleanup','Composite & Layered Art','Brightness & Contrast Masking','Sharpening & Noise Reduction','Typography & Branding Overlays'],
+    process: [
+      { n:'01', title:'File Submission', desc:'Send us your raw files — RAW, JPEG, or TIFF. We accept up to 500 photos per batch.' },
+      { n:'02', title:'Style Briefing', desc:'Share your preferred editing style, tone, skin preferences, and reference images.' },
+      { n:'03', title:'Sample Edit & Approval', desc:'We deliver 5 sample edits for approval before processing the full batch.' },
+      { n:'04', title:'Final Delivery', desc:'Completed files delivered via Google Drive or WeTransfer in 24–72 hours.' }
+    ],
+    meta: [{ label:'Turnaround', value:'24–72 Hours' },{ label:'Batch Size', value:'Up to 500 Photos' },{ label:'File Formats', value:'JPEG, PNG, TIFF, PSD' },{ label:'Revisions', value:'3 Rounds Included' },{ label:'Starting Price', value:'₹5,000' }],
+    addons: [{ name:'Rush 12-Hour Delivery', price:'+₹2,000' },{ name:'PSD Source Files', price:'+₹1,500' },{ name:'Video Color Grade', price:'+₹3,000' },{ name:'Cinematic LUT Pack', price:'+₹800' }],
+    previews: [{ bg:'linear-gradient(135deg,#1a0a2e,#2d1060)', emoji:'🎨', label:'Color Grade' },{ bg:'linear-gradient(135deg,#0a1a2e,#102850)', emoji:'✨', label:'Retouch' },{ bg:'linear-gradient(135deg,#1a1a0a,#2a2810)', emoji:'🖼️', label:'Composite' }]
+  },
+  wedding: {
+    icon: '💍', title: 'Wedding Photography<br>& <em>Film</em>',
+    subtitle: 'Ceremony · Reception · Cinematic Films',
+    bookingValue: 'Wedding Photography',
+    desc: 'Your wedding day is a singular, unrepeatable story. We document it with the care it deserves — blending photojournalism instincts with a fine-art eye. From quiet moments before the ceremony to the last dance of the night, nothing is missed.',
+    features: ['Pre-Wedding Shoot','Ceremony Full Coverage','Reception & Dance Coverage','Candid & Photojournalism','Bridal & Groom Portraits','Detail Shots (Rings, Décor)','Cinematic Wedding Film','Drone Aerial Footage','Same-Day Social Teaser','Printed Album Available'],
+    process: [
+      { n:'01', title:'Consultation', desc:'We meet to understand your vision, venue, guest count, and timeline. No two weddings are planned the same.' },
+      { n:'02', title:'Venue Scout', desc:'We visit the venue to plan lighting, angles, and movement paths before the wedding day.' },
+      { n:'03', title:'Day of Coverage', desc:'Our team arrives 30 minutes early. One photographer for candids, one for key moments.' },
+      { n:'04', title:'Edit & Film Delivery', desc:'Edited gallery in 3–4 weeks. Cinematic film delivered in 6–8 weeks with custom soundtrack.' }
+    ],
+    meta: [{ label:'Coverage Duration', value:'4 – 14 Hours' },{ label:'Edited Photos', value:'300 – 1000+' },{ label:'Film Length', value:'5 – 20 Minutes' },{ label:'Team Size', value:'1 – 3 Photographers' },{ label:'Starting Price', value:'₹25,000' }],
+    addons: [{ name:'Drone Aerial Package', price:'+₹5,000' },{ name:'Pre-Wedding Shoot', price:'+₹8,000' },{ name:'Printed Album (30 pages)', price:'+₹6,000' },{ name:'Social Media Highlight Reel', price:'+₹3,000' }],
+    previews: [{ bg:'linear-gradient(135deg,#1a120b,#3d2a10)', emoji:'💍', label:'Ceremony' },{ bg:'linear-gradient(135deg,#1a0808,#350c0c)', emoji:'🌹', label:'Portraits' },{ bg:'linear-gradient(135deg,#08101a,#101828)', emoji:'🎬', label:'Film Frame' }]
+  },
+  promotion: {
+    icon: '📢', title: 'Promotion Photos<br>& <em>Videos</em>',
+    subtitle: 'Brand Content · Product · Restaurant · Services',
+    bookingValue: 'Promotion Photos',
+    desc: 'In a world of endless content, quality separates the brands that get noticed from those that get scrolled past. We produce promotional content that commands attention — for restaurants, fashion brands, real estate, fitness, and beyond.',
+    features: ['Product Photography','Food & Restaurant Shoots','Lifestyle Content','Social Media Reels & Shorts','Brand Story Videos','Behind-the-Scenes Content','Testimonial Videos','Promo Teasers','Before & After Reveals','360° Product Views'],
+    process: [
+      { n:'01', title:'Brand Discovery', desc:'We study your brand identity, audience, and competitors to craft content with purpose.' },
+      { n:'02', title:'Shot List & Script', desc:'A detailed shot list and video script created and approved before shoot day.' },
+      { n:'03', title:'Production Day', desc:'We bring lighting, props, and a stylist if needed. Studio or on-location — your choice.' },
+      { n:'04', title:'Edit & Deliver', desc:'Photos in 48 hours. Videos within 5–7 business days. All formatted for your platforms.' }
+    ],
+    meta: [{ label:'Session Duration', value:'2 – 8 Hours' },{ label:'Photos Delivered', value:'50 – 300' },{ label:'Video Length', value:'30 sec – 5 min' },{ label:'Platforms', value:'IG, YouTube, FB, OTT' },{ label:'Starting Price', value:'₹10,000' }],
+    addons: [{ name:'Script Writing', price:'+₹2,000' },{ name:'Professional Stylist', price:'+₹4,000' },{ name:'Motion Graphics / Captions', price:'+₹3,500' },{ name:'Multi-Platform Format Pack', price:'+₹1,500' }],
+    previews: [{ bg:'linear-gradient(135deg,#0a1a0f,#102518)', emoji:'📢', label:'Brand Shoot' },{ bg:'linear-gradient(135deg,#1a100a,#281808)', emoji:'🍽️', label:'Food Photography' },{ bg:'linear-gradient(135deg,#0a0a1a,#10102a)', emoji:'🎞️', label:'Promo Reel' }]
+  },
+  ads: {
+    icon: '📺', title: 'Advertisement<br><em>Production</em>',
+    subtitle: 'Commercial · Digital Ads · OTT · Broadcast',
+    bookingValue: 'Advertisement Videos',
+    desc: 'From 15-second Instagram cuts to full 60-second broadcast commercials, we produce advertisement content that converts. Our team handles concept, production, and post — including voiceover, motion graphics, and platform-specific optimization.',
+    features: ['TV & OTT Commercials','Social Media Ad Creatives','Google Display Ads','YouTube Pre-Roll Ads','Animated Explainer Videos','Voiceover & Subtitles','Motion Graphics & Titles','A/B Version Production','Brand Identity Integration','Platform-Specific Edits'],
+    process: [
+      { n:'01', title:'Strategy & Concept', desc:'We define the goal (awareness, conversion, retargeting) and develop a creative concept.' },
+      { n:'02', title:'Script & Storyboard', desc:'Full storyboard created, reviewed, and approved before any production begins.' },
+      { n:'03', title:'Production', desc:'Professional studio or on-location shoot with direction, lighting, and sound.' },
+      { n:'04', title:'Post & Delivery', desc:'Editing, sound design, motion graphics, and multiple format exports within 7 days.' }
+    ],
+    meta: [{ label:'Ad Lengths', value:'6s / 15s / 30s / 60s' },{ label:'Production Days', value:'1 – 3 Days' },{ label:'Turnaround', value:'5 – 10 Business Days' },{ label:'Formats', value:'MP4, MOV, MXF' },{ label:'Starting Price', value:'₹20,000' }],
+    addons: [{ name:'Professional Voiceover', price:'+₹3,000' },{ name:'Actors / Talent Casting', price:'+₹8,000' },{ name:'Extended Broadcast License', price:'+₹5,000' },{ name:'Performance Analytics Review', price:'+₹2,500' }],
+    previews: [{ bg:'linear-gradient(135deg,#1a0a0a,#2d1010)', emoji:'📺', label:'TV Commercial' },{ bg:'linear-gradient(135deg,#0a0a18,#10102d)', emoji:'📱', label:'Social Ad' },{ bg:'linear-gradient(135deg,#121a0a,#182d10)', emoji:'🎯', label:'Campaign Shot' }]
+  },
+  events: {
+    icon: '🎪', title: 'Event Coverage<br>Photos & <em>Videos</em>',
+    subtitle: 'Corporate · Concerts · Launches · Galas',
+    bookingValue: 'Event Coverage (Photos)',
+    desc: 'Events are ephemeral — our coverage makes them permanent. Whether it is a 50-person corporate conference or a 2,000-seat concert, we deploy the right team and equipment to document every keynote, performance, and networking moment.',
+    features: ['Multi-Camera Video Setup','Live Event Photography','Keynote & Speaker Coverage','Crowd & Atmosphere Shots','Stage & Performance Filming','Same-Day Highlight Reel','Interview & Testimonial Clips','Aerial Drone Coverage','Photo Booth Setup','Live Stream Support'],
+    process: [
+      { n:'01', title:'Event Brief', desc:'Share your event schedule, key moments, VIP guests, and brand requirements.' },
+      { n:'02', title:'Venue Recce', desc:'We visit the venue to plan camera positions, lighting, and movement logistics.' },
+      { n:'03', title:'Day of Coverage', desc:'Dedicated team with pro-grade cameras, lighting rigs, and wireless audio systems.' },
+      { n:'04', title:'Post-Event Delivery', desc:'Edited gallery in 48 hours. Highlight film within 5 business days.' }
+    ],
+    meta: [{ label:'Event Duration', value:'Half day – Multi-day' },{ label:'Team Size', value:'1 – 6 Professionals' },{ label:'Delivery Time', value:'24 – 72 Hours' },{ label:'Coverage Type', value:'Photo + Video Combo' },{ label:'Starting Price', value:'₹15,000' }],
+    addons: [{ name:'Same-Day Reel (4 hours)', price:'+₹4,000' },{ name:'Drone Aerial Package', price:'+₹5,000' },{ name:'Photo Booth Station', price:'+₹6,000' },{ name:'Live Stream Setup', price:'+₹8,000' }],
+    previews: [{ bg:'linear-gradient(135deg,#0a1a0a,#102810)', emoji:'🎪', label:'Event Hall' },{ bg:'linear-gradient(135deg,#1a0a12,#2a1020)', emoji:'🎤', label:'Stage Coverage' },{ bg:'linear-gradient(135deg,#100a1a,#1a1028)', emoji:'🏢', label:'Corporate' }]
+  },
+  creative: {
+    icon: '🎬', title: 'Creative<br><em>Direction</em>',
+    subtitle: 'Concept · Styling · End-to-End Production',
+    bookingValue: 'Full Package (Photos + Videos)',
+    desc: 'The best visuals begin with the best ideas. Our creative direction service wraps every element — from initial concept and mood boarding to location scouting, talent casting, prop styling, and on-set art direction.',
+    features: ['Concept & Mood Board Development','Location Scouting','Talent & Model Casting','Wardrobe & Prop Styling','On-Set Art Direction','Brand Identity Alignment','Shot List & Storyboarding','Production Coordination','Post-Production Supervision','Final Asset Delivery'],
+    process: [
+      { n:'01', title:'Discovery Session', desc:'A 1-hour deep-dive to understand your brand, aesthetics, goals, and what success looks like.' },
+      { n:'02', title:'Creative Development', desc:'Mood boards, references, and a detailed creative brief developed and shared within 3 days.' },
+      { n:'03', title:'Pre-Production', desc:'Location booking, casting, wardrobe sourcing, shot list finalization — all handled by us.' },
+      { n:'04', title:'Production & Delivery', desc:'Directed shoot day followed by full post-production. Complete asset pack delivered.' }
+    ],
+    meta: [{ label:'Project Timeline', value:'2 – 6 Weeks' },{ label:'Shoot Days', value:'1 – 5 Days' },{ label:'Assets Delivered', value:'Photos + Videos + Edits' },{ label:'Ideal For', value:'Brand Launches, Campaigns' },{ label:'Starting Price', value:'₹50,000' }],
+    addons: [{ name:'Professional Models (per day)', price:'+₹12,000' },{ name:'Full Styling Team', price:'+₹10,000' },{ name:'Campaign Strategy Deck', price:'+₹5,000' },{ name:'Usage Rights (1 Year)', price:'+₹8,000' }],
+    previews: [{ bg:'linear-gradient(135deg,#1a1006,#281c0a)', emoji:'🎬', label:'On Set' },{ bg:'linear-gradient(135deg,#060a1a,#0c1228)', emoji:'🎨', label:'Concept' },{ bg:'linear-gradient(135deg,#0f0a18,#18102a)', emoji:'✦', label:'Direction' }]
+  }
+};
+
+let currentServiceKey = null;
+
+function openService(key) {
+  const d = SERVICE_DATA[key];
+  if (!d) return;
+  currentServiceKey = key;
+  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active-card'));
+  if (event && event.currentTarget) event.currentTarget.classList.add('active-card');
+
+  document.getElementById('drawerIcon').textContent = d.icon;
+  document.getElementById('drawerTitle').innerHTML = d.title;
+  document.getElementById('drawerSubtitle').textContent = d.subtitle;
+  document.getElementById('drawerDesc').textContent = d.desc;
+  document.getElementById('drawerFeatures').innerHTML = d.features.map(f => `<li>${f}</li>`).join('');
+  document.getElementById('drawerProcess').innerHTML = d.process.map(p => `<div class="process-step"><div class="process-dot">${p.n}</div><div class="process-content"><strong>${p.title}</strong><span>${p.desc}</span></div></div>`).join('');
+  document.getElementById('drawerPreviews').innerHTML = d.previews.map((p, i) => `<div class="preview-tile"><div class="preview-tile-inner" style="background:${p.bg};font-size:${i===0?'56px':'36px'}">${p.emoji}<span class="preview-tile-label">${p.label}</span></div></div>`).join('');
+  document.getElementById('drawerMeta').innerHTML = d.meta.map(m => `<div class="drawer-meta-row"><span>${m.label}</span><span>${m.value}</span></div>`).join('');
+  document.getElementById('drawerAddons').innerHTML = d.addons.map(a => `<div class="addon-item"><span class="addon-name">${a.name}</span><span class="addon-price">${a.price}</span></div>`).join('');
+
+  document.getElementById('service-drawer').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeServiceDrawer() {
+  document.getElementById('service-drawer').classList.remove('open');
+  document.body.style.overflow = '';
+  document.querySelectorAll('.service-card').forEach(c => c.classList.remove('active-card'));
+  // Reset scale pills and detail panel
+  document.querySelectorAll('.scale-pill').forEach(p => p.classList.remove('selected'));
+  document.getElementById('drawerScaleDetail').classList.remove('show');
+  currentServiceKey = null;
+  currentDrawerScale = '';
+}
+
+function bookFromDrawer() {
+  if (!currentServiceKey) return;
+  const d = SERVICE_DATA[currentServiceKey];
+  const drawerScale = currentDrawerScale; // carry scale from drawer
+  closeServiceDrawer();
+  setTimeout(() => {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+    setTimeout(() => {
+      // Pre-select service
+      const sel = document.getElementById('serviceType');
+      for (let i = 0; i < sel.options.length; i++) {
+        if (sel.options[i].text === d.bookingValue) {
+          sel.selectedIndex = i;
+          sel.style.borderColor = 'var(--accent)';
+          sel.style.background = 'rgba(200,169,110,0.08)';
+          setTimeout(() => { sel.style.borderColor = ''; sel.style.background = ''; }, 1500);
+          break;
+        }
+      }
+      // Pre-select scale in booking form if drawer scale was chosen
+      if (drawerScale) {
+        const scaleMap = { single: 'single', medium: 'medium', large: 'large' };
+        const bookingScale = scaleMap[drawerScale] || (drawerScale === 'medium' ? 'medium' : drawerScale);
+        const bscEl = document.querySelector(`.bsc[data-scale="${bookingScale}"]`);
+        if (bscEl) { selectBookingScale(bookingScale, bscEl); bscEl.scrollIntoView({ behavior: 'smooth', block: 'nearest' }); }
+      }
+    }, 700);
+  }, 350);
+}
+
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeServiceDrawer(); });
+
+// ═══════════════════════════════════════════════════════════════════════════════
+// PORTFOLIO MANAGER — TABBED BY CATEGORY
+// ═══════════════════════════════════════════════════════════════════════════════
+
+const PM_CATS = ['wedding','events','ads','editorial'];
+const PM_CAT_LABELS = { wedding:'Weddings', events:'Events', ads:'Ads & Promo', editorial:'Editorial' };
+
+// Default fallback items (shown on public grid when no uploads exist)
+const DEFAULT_PORTFOLIO = [
+  { id:'d1', type:'image', src:'', emoji:'💍', bg:'linear-gradient(135deg,#1a120b,#2d1b0e)', title:'Wedding · Hyderabad Ballroom', cat:'wedding' },
+  { id:'d2', type:'image', src:'', emoji:'📸', bg:'linear-gradient(135deg,#0d1b2a,#1b2838)', title:'Portrait · Editorial',          cat:'editorial' },
+  { id:'d3', type:'image', src:'', emoji:'📺', bg:'linear-gradient(135deg,#1a0a0a,#2b1010)', title:'Advertisement · Brand',         cat:'ads' },
+  { id:'d4', type:'image', src:'', emoji:'🎪', bg:'linear-gradient(135deg,#0a1a0a,#102b10)', title:'Events · Corporate Gala',       cat:'events' },
+  { id:'d5', type:'image', src:'', emoji:'🌹', bg:'linear-gradient(135deg,#1a1505,#2a2010)', title:'Wedding · Destination',         cat:'wedding' },
+  { id:'d6', type:'image', src:'', emoji:'🎬', bg:'linear-gradient(135deg,#10101a,#1a1a2a)', title:'Promotion · Product Reel',      cat:'ads' },
+  { id:'d7', type:'image', src:'', emoji:'🎤', bg:'linear-gradient(135deg,#1a0a15,#2a1020)', title:'Events · Concert Coverage',     cat:'events' }
+];
+
+// Main data store — persisted per category in localStorage
+let portfolioItems = JSON.parse(localStorage.getItem('la_portfolio') || '[]');
+
+// Pending file per category (one at a time per tab)
+const pendingFiles = { wedding: null, events: null, ads: null, editorial: null };
+
+function savePortfolio() {
+  localStorage.setItem('la_portfolio', JSON.stringify(portfolioItems));
+}
+
+// ── Tab switching ──────────────────────────────────────────────────────────────
+function switchPmTab(cat, btn) {
+  document.querySelectorAll('.pm-cat-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.pm-tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('pmPanel-' + cat).classList.add('active');
+  if (cat === 'all') renderPmAllGrid();
+}
+
+// ── Drag-and-drop for each category zone ──────────────────────────────────────
+document.querySelectorAll('.pm-cat-upload-zone').forEach(zone => {
+  zone.addEventListener('dragover',  e => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', () => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', e => {
+    e.preventDefault(); zone.classList.remove('drag-over');
+    handleCatFiles(zone.dataset.cat, e.dataTransfer.files);
+  });
+});
+
+// ── Handle file selection for a specific category ──────────────────────────────
+function handleCatFiles(cat, files) {
+  if (!files || files.length === 0) return;
+  const file = files[0];
+  if (file.size > 10 * 1024 * 1024) {
+    showNotif('File too large — max 10MB per file', 'error'); return;
+  }
+  const isVideo = file.type.startsWith('video/');
+  const isImage = file.type.startsWith('image/');
+  if (!isVideo && !isImage) { showNotif('Only image and video files are supported', 'error'); return; }
+
+  const reader = new FileReader();
+  reader.onload = function(ev) {
+    const dataUrl = ev.target.result;
+    pendingFiles[cat] = { dataUrl, type: isVideo ? 'video' : 'image', name: file.name, size: file.size };
+
+    // Thumb
+    const thumb = document.getElementById('pmThumb-' + cat);
+    thumb.innerHTML = isVideo
+      ? `<video src="${dataUrl}" muted></video>`
+      : `<img src="${dataUrl}" alt="preview">`;
+
+    // Pre-fill caption
+    const titleEl = document.getElementById('pmTitle-' + cat);
+    titleEl.value = PM_CAT_LABELS[cat] + ' · ' + file.name.replace(/\.[^.]+$/, '').replace(/[-_]/g, ' ');
+
+    // Show pending bar + form
+    const bar = document.getElementById('pmPending-' + cat);
+    bar.style.display = 'block';
+    bar.textContent = `📎 Ready: ${file.name}  (${isVideo ? '🎬 Video' : '📷 Photo'} · ${(file.size/1024).toFixed(0)} KB) — enter a caption and click Add`;
+
+    document.getElementById('pmForm-' + cat).style.display = 'flex';
+    titleEl.focus();
+  };
+  reader.readAsDataURL(file);
+}
+
+// ── Commit item to a category ──────────────────────────────────────────────────
+function commitItem(cat) {
+  const pf = pendingFiles[cat];
+  if (!pf) { showNotif('Please select a file first', 'error'); return; }
+  const titleEl = document.getElementById('pmTitle-' + cat);
+  const title = titleEl.value.trim();
+  if (!title) { showNotif('Please enter a caption', 'error'); titleEl.focus(); return; }
+
+  const item = {
+    id: 'pm_' + Date.now(),
+    type: pf.type,
+    src: pf.dataUrl,
+    title,
+    cat,
+    added: new Date().toISOString()
+  };
+
+  portfolioItems.unshift(item);
+  savePortfolio();
+  pendingFiles[cat] = null;
+
+  // Reset form
+  document.getElementById('pmForm-' + cat).style.display = 'none';
+  document.getElementById('pmPending-' + cat).style.display = 'none';
+  document.getElementById('pmThumb-' + cat).innerHTML = '';
+  titleEl.value = '';
+  // Reset file input
+  const panel = document.getElementById('pmPanel-' + cat);
+  const inp = panel.querySelector('.pm-file-input');
+  if (inp) inp.value = '';
+
+  updatePmCounts();
+  renderCatList(cat);
+  renderPmAllGrid();
+  renderPublicPortfolio();
+  showNotif('✓ Added to ' + PM_CAT_LABELS[cat] + ' portfolio', 'success');
+}
+
+// ── Delete an item ─────────────────────────────────────────────────────────────
+function deletePortfolioItem(id) {
+  const item = portfolioItems.find(x => x.id === id);
+  const cat = item ? item.cat : null;
+  portfolioItems = portfolioItems.filter(x => x.id !== id);
+  savePortfolio();
+  if (cat) renderCatList(cat);
+  renderPmAllGrid();
+  updatePmCounts();
+  renderPublicPortfolio();
+}
+
+// ── Render the items list for one category tab ─────────────────────────────────
+function renderCatList(cat) {
+  const container = document.getElementById('pmList-' + cat);
+  const catItems = portfolioItems.filter(x => x.cat === cat);
+
+  if (catItems.length === 0) {
+    container.innerHTML = `<div class="pm-empty">No ${PM_CAT_LABELS[cat].toLowerCase()} items yet. Upload above.</div>`;
+    return;
+  }
+
+  container.innerHTML = catItems.map(item => `
+    <div class="pm-item">
+      <div class="pm-preview-strip">
+        ${item.type === 'video'
+          ? `<video src="${item.src}" muted></video>`
+          : `<img src="${item.src}" alt="${item.title}">`}
+      </div>
+      <div class="pm-item-info">
+        <div class="pm-item-title">${item.title}</div>
+        <div class="pm-item-meta">Added ${new Date(item.added).toLocaleDateString('en-IN',{day:'numeric',month:'short',year:'numeric'})}</div>
+      </div>
+      <span class="pm-item-type ${item.type}">${item.type === 'video' ? '🎬 Video' : '📷 Photo'}</span>
+      <button class="pm-item-del" onclick="deletePortfolioItem('${item.id}')">✕ Remove</button>
+    </div>
+  `).join('');
+}
+
+// ── Render All-tab visual grid ────────────────────────────────────────────────
+function renderPmAllGrid() {
+  const grid = document.getElementById('pmAllGrid');
+  if (portfolioItems.length === 0) {
+    grid.innerHTML = '<div class="pm-empty" style="grid-column:1/-1">No portfolio items uploaded yet. Switch to a category tab to upload.</div>';
+    return;
+  }
+  grid.innerHTML = portfolioItems.map(item => `
+    <div class="pm-all-item">
+      ${item.type === 'video'
+        ? `<video src="${item.src}" muted loop></video>`
+        : `<img src="${item.src}" alt="${item.title}">`}
+      <div class="pm-all-overlay">
+        <div class="pm-all-title">${item.title}</div>
+        <div class="pm-all-cat">${PM_CAT_LABELS[item.cat] || item.cat}</div>
+      </div>
+      <button class="pm-all-del-btn" onclick="deletePortfolioItem('${item.id}')" title="Remove">✕</button>
+    </div>
+  `).join('');
+}
+
+// ── Update tab count badges ────────────────────────────────────────────────────
+function updatePmCounts() {
+  const allEl = document.getElementById('pmCnt-all');
+  if (allEl) allEl.textContent = portfolioItems.length;
+  PM_CATS.forEach(cat => {
+    const el = document.getElementById('pmCnt-' + cat);
+    if (el) el.textContent = portfolioItems.filter(x => x.cat === cat).length;
+  });
+}
+
+// ── Inline notification toast ─────────────────────────────────────────────────
+function showNotif(msg, type) {
+  const existing = document.getElementById('pmNotif');
+  if (existing) existing.remove();
+  const n = document.createElement('div');
+  n.id = 'pmNotif';
+  n.textContent = msg;
+  n.style.cssText = `
+    position:fixed; bottom:100px; left:50%; transform:translateX(-50%);
+    padding:12px 24px; border-radius:980px;
+    background:${type==='success'?'rgba(48,209,88,0.95)':'rgba(255,69,58,0.95)'};
+    color:#fff; font-size:14px; font-weight:600; font-family:var(--font-body);
+    z-index:99999; animation:fadeUp 0.3s var(--transition) forwards;
+    box-shadow:0 8px 32px rgba(0,0,0,0.4); white-space:nowrap;`;
+  document.body.appendChild(n);
+  setTimeout(() => n.remove(), 3000);
+}
+
+// ── Public Portfolio Grid ─────────────────────────────────────────────────────
+function renderPublicPortfolio() {
+  const grid = document.getElementById('portfolioGrid');
+  const items = portfolioItems.length > 0 ? portfolioItems : DEFAULT_PORTFOLIO;
+
+  grid.innerHTML = items.map((item, idx) => {
+    const isFirst = idx === 0;
+    const isDefault = !item.src;
+
+    let mediaHtml = '';
+    if (isDefault) {
+      mediaHtml = `<div class="portfolio-img" style="background:${item.bg};font-size:${isFirst?'72px':'48px'}">${item.emoji}</div>`;
+    } else if (item.type === 'video') {
+      mediaHtml = `
+        <video src="${item.src}" muted loop playsinline
+          onmouseenter="this.play()" onmouseleave="this.pause();this.currentTime=0"
+          style="width:100%;height:100%;object-fit:cover;display:block">
+        </video>
+        <span class="vid-badge">▶ Video</span>`;
+    } else {
+      mediaHtml = `<img src="${item.src}" alt="${item.title}">`;
+    }
+
+    return `<div class="portfolio-item" data-cat="${item.cat}"
+      style="${isFirst?'grid-column:span 2;grid-row:span 2;min-height:400px':''}">
+      ${mediaHtml}
+      <div class="portfolio-overlay">
+        <div class="portfolio-tag">${item.title}</div>
+      </div>
+    </div>`;
+  }).join('');
+
+  // Re-apply cursor hover
+  grid.querySelectorAll('.portfolio-item').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.transform = 'scale(2)';
+      ring.style.width = '60px'; ring.style.height = '60px';
+      ring.style.borderColor = 'rgba(160,120,64,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.transform = 'scale(1)';
+      ring.style.width = '40px'; ring.style.height = '40px';
+      ring.style.borderColor = 'rgba(160,120,64,0.45)';
+    });
+  });
+}
+
+// ── Filter (public tabs) ──────────────────────────────────────────────────────
+function filterPortfolio(cat, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('#portfolioGrid .portfolio-item').forEach(item => {
+    const show = cat === 'all' || item.dataset.cat === cat;
+    item.style.display = show ? 'block' : 'none';
+    if (show) { item.style.animation = 'none'; item.offsetHeight; item.style.animation = 'fadeUp 0.4s forwards'; }
+  });
+}
+
+// ── Full dev panel refresh (also updates portfolio) ───────────────────────────
+function renderDevPortfolioList() {
+  PM_CATS.forEach(cat => renderCatList(cat));
+  renderPmAllGrid();
+  updatePmCounts();
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────────
+renderPublicPortfolio();
+renderDevPortfolioList();
+</script>
+</body>
+</html>
